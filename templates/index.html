@@ -1,7 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div>
-  test
-</div>
+  <div id="home-text">
+    {% autoescape false %}
+      {% for x in data %}
+        {{ x.content }}
+      {% endfor %}
+   {% endautoescape %}
+ </div>
+
+  </div>
 {% endblock %}
