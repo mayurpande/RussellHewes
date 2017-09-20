@@ -20,6 +20,15 @@ img{
   max-width: 100%;
 }
 
+.container{
+  width:100%;
+  margin:0;
+  padding:0;
+}
+
+/*********************************
+header
+**********************************/
 #header{
    display:flex;
    align-items:center;
@@ -45,4 +54,13 @@ img{
   border-right:1px solid #DCD268;
   float:left;
   padding:0 10px;
+}
+
+
+/*******************************
+home page
+********************************/
+#home-text{
+  width:93%;
+  margin:0 auto;
 }
