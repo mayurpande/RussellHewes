@@ -1,0 +1,21 @@
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html{
+  position:relative;
+  min-height: 100%;
+}
+
+body{
+   margin:0;
+   padding:0;
+   background:#000;
+}
+
+#header{
+   display:flex;
+   align-items:center;
+   justify-content:center;
+}
