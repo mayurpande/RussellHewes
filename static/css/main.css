@@ -21,7 +21,7 @@ img{
   max-width: 100%;
 }
 
-.container{
+.t{
   display:flex;
   flex-direction: column;
   width:100%;
@@ -40,7 +40,7 @@ img{
 
 #img-test{
   background-image:url(../img/garden.jpg);
-  height:calc(100vh - 154px);
+  height:calc(100vh - 163px);
   width:100%;
   background-size:cover;
   background-position: center;
