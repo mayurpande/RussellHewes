@@ -12,9 +12,10 @@ def main():
     name = request.form['username']
     email = request.form['email']
     if name and email:
+      flash('Thank you for your enquiry, someone will be in contact with you very shortly','success')
       return redirect(url_for('main'))
     else:
-      flash('You have not in all mandatory fields')
+      flash('You have not filled in all mandatory fields, please try again','danger')
       return redirect(url_for('main',_anchor='contact'))
   else:
     #use pymysql cursor
