@@ -51,12 +51,14 @@
   <hr />
   <div id="contact">
     <div class="container" >
-      {% with messages = get_flashed_messages() %}
-       {% if messages %}
-          {% for message in messages %}
-             {{ message }}
-          {% endfor %}
-       {% endif %}
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}" style="list-style:none;">
+                   <li>{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
       {% endwith %}
       <h3>Get in touch for a quote now</h3>
       <p>Please tell us more about your enqiury</p>
