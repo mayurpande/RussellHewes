@@ -8,10 +8,14 @@ app = Flask(__name__)
 def main():
   #use pymysql cursor
   with connection.cursor() as cursor:
-    sql = "SELECT * FROM `home_page`"
-    cursor.execute(sql,(),)
+    text_content_query = "SELECT * FROM `home_page`"
+    cursor.execute(text_content_query,(),)
     result = cursor.fetchall()
-  return render_template('index.html',data=result)
+
+    img_name_query = "SELECT * FROM `home_page_img`"
+    cursor.execute(img_name_query,(),)
+    picture_rows = cursor.fetchall()
+  return render_template('index.html',data=result,rows=picture_rows)
 
 
 
