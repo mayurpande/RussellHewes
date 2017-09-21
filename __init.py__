@@ -30,6 +30,9 @@ def main():
     return render_template('index.html',data=result,rows=picture_rows)
 
 
+@app.route('/<type>')
+def job(type):
+  return 'type %s' % type
 
 if __name__ == "__main__":
     app.run(debug=True)
