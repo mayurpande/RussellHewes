@@ -1,21 +1,32 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, url_for, request, redirect
 from db import connection
 
 app = Flask(__name__)
 
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 @app.route('/',methods=['GET','POST'])
 def main():
-  #use pymysql cursor
-  with connection.cursor() as cursor:
-    text_content_query = "SELECT * FROM `home_page`"
-    cursor.execute(text_content_query,(),)
-    result = cursor.fetchall()
 
-    img_name_query = "SELECT * FROM `home_page_img`"
-    cursor.execute(img_name_query,(),)
-    picture_rows = cursor.fetchall()
-  return render_template('index.html',data=result,rows=picture_rows)
+  if request.method == 'POST':
+    name = request.form['username']
+    email = request.form['email']
+    if name and email:
+      return redirect(url_for('main'))
+    else:
+      flash('You have not in all mandatory fields')
+      return redirect(url_for('main',_anchor='contact'))
+  else:
+    #use pymysql cursor
+    with connection.cursor() as cursor:
+      text_content_query = "SELECT * FROM `home_page`"
+      cursor.execute(text_content_query,(),)
+      result = cursor.fetchall()
+
+      img_name_query = "SELECT * FROM `home_page_img`"
+      cursor.execute(img_name_query,(),)
+      picture_rows = cursor.fetchall()
+    return render_template('index.html',data=result,rows=picture_rows)
 
 
 
