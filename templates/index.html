@@ -1,13 +1,29 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-  <div id="home-text">
+
+
+ <div id="mobile-caption">
+   <p>Established company in these fields</p>
+   <p>Something brief to say here?</p>
+ </div>
+
+<!-- <div id="home-gallery">
+  {% for x in rows %}
+     <div class="flex-gallery">
+       <img src="/static/img/{{ x.img_name }}" />
+     </div>
+  {% endfor %}
+</div> -->
+  <!-- <div id="home-text">
     {% autoescape false %}
       {% for x in data %}
         {{ x.content }}
       {% endfor %}
    {% endautoescape %}
- </div>
+ </div> -->
 
-  </div>
+
+
+
 {% endblock %}
