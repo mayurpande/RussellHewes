@@ -11,9 +11,10 @@ html{
 body{
    margin:0;
    padding:0;
-   background:#000;
+   #background:#000;
    font-family: Verdana, Geneva, sans-serif;
    color:#fff;
+
 }
 
 img{
@@ -21,9 +22,32 @@ img{
 }
 
 .container{
-  position:relative;
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  background-color:#000;
+
+
+
 }
 
+.content{
+  margin:0;
+  padding:0;
+
+
+}
+
+#img-test{
+  background-image:url(../img/garden.jpg);
+  height:calc(100vh - 154px);
+  width:100%;
+  background-size:cover;
+  background-position: center;
+  position:relative;
+
+
+}
 /*********************************
 header
 **********************************/
@@ -33,8 +57,8 @@ header
    justify-content:center;
    color:#DCD268;
    flex-direction: column;
-   position:absolute;
-   top:0;
+   /*position:absolute;*/
+   /*top:0;*/
    background-color:#000;
 }
 
@@ -63,18 +87,7 @@ header
 home page
 ********************************/
 
-#mobile-img{
-  background-image:url(../img/garden.jpg);
-  height:100%;
-  width:100%;
-  min-height:100%;
-  min-width:100%;
-  background-size:cover;
-  background-position: center;
-  display:block;
-  position: absolute;
 
-}
 
 #mobile-caption{
   position: absolute;
@@ -99,4 +112,47 @@ home page
   width:95%;
   margin:0 auto;
   margin-bottom:3px;
+}
+
+#home-text{
+  background-color: #000;
+  width:100%;
+  text-align: center;
+  font-size:0.9em;
+
+}
+
+#contact{
+  width:100%;
+  text-align: center;
+
+}
+
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9em;
+
+}
+
+.contact-info a {
+
+	display: block;
+	min-height: 20px;
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	padding: 0 0 0 30px;
+	margin: 0 0 10px;
+}
+
+
+
+.contact-info li.phone a {
+   background-image: url('../img/phone.png');
+}
+
+.contact-info li.mail a {
+   background-image: url('../img/mail.png');
 }
