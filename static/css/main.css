@@ -73,6 +73,7 @@ header
    padding:0;
    margin:0;
 
+
 }
 
 #header-item li{
@@ -80,6 +81,11 @@ header
   border-right:1px solid #DCD268;
   float:left;
   padding:0 10px;
+}
+
+#header-item li a{
+  color:#DCD268;
+
 }
 
 
@@ -127,6 +133,12 @@ home page
   text-align: center;
 
 }
+
+
+
+/******************************************
+FOOTER
+******************************************/
 
 
 .contact-info ul {
