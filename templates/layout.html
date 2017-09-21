@@ -7,23 +7,49 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/normailize.css")}}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/main.css")}}" />
+
 
 </head>
 
-<body>
+<body >
+
+
+  {% include 'nav.html' %}
+  <div class="container">
 
 
 
-  <div id="mobile-img">
-    {% include 'nav.html' %}
-    {% block content %}
+      <div class="content">
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
+      </div>
+
+
+    <div class="content">
+      {% block wrapper %}
+
+      {% endblock %}
+    </div>
+
+    <div class="content">
+      {% block wrap %}
+
+      {% endblock %}
+    </div>
+
+
+
   </div>
 
 
 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -3,10 +3,16 @@
 {% block content %}
 
 
- <div id="mobile-caption">
-   <p>Established company in these fields</p>
-   <p>Something brief to say here?</p>
+ <div id="img-test">
+     <div id="mobile-caption">
+      <p>Established company in these fields</p>
+      <p>Something brief to say here?</p>
+    </div>
  </div>
+
+   <hr />
+
+
 
 <!-- <div id="home-gallery">
   {% for x in rows %}
@@ -15,15 +21,72 @@
      </div>
   {% endfor %}
 </div> -->
-  <!-- <div id="home-text">
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block wrapper %}
+
+
+  <div id="home-text">
+    <h2>Russell Hewes</h2>
+    <h2>Company Profile</h2>
     {% autoescape false %}
       {% for x in data %}
         {{ x.content }}
       {% endfor %}
    {% endautoescape %}
- </div> -->
+ </div>
 
 
+{% endblock %}
+
+{% block wrap %}
+
+  <hr />
+  <div id="contact">
+
+    <div class="container">
+      <h3>Get in touch for a quote now</h3>
+      <p>Please tell us more about your enqiury</p>
+      <form method="post" action="/">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name"  placeholder="Enter name" name="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="number">Number:</label>
+          <input type="text" class="form-control" id="number"  placeholder="Enter number" name="number">
+        </div>
+
+        <div class="form-group">
+          <label for="text-content">Message:</label>
+          <textarea name="text-content" class="form-control" id="text-content" rows=10></textarea>
+        </div>
+
+
+
+
+
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+
+
+
+
+ </div>
 
 
 {% endblock %}
