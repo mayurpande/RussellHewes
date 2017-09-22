@@ -4,6 +4,13 @@
 {% block content %}
 
 <div class="row">
+  <div class="col-sm-12 jobs-background">
+    <h1>type</h1>
+    <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
+  </div>
+</div>
+
+<div class="row" style="background-color:#fff; color: #222; padding-top:50px;">
   <div class="col-sm-12">
     {% autoescape false %}
     {% for x in brief %}
@@ -16,10 +23,11 @@
 <div class="row">
   {% for x in data %}
     {% if loop.index < 4 %}
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-4 col-lg-4">
       <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
       <p>{{ x.img_text }}</p>
     </div>
+    
     {% endif %}
   {% endfor %}
 </div>
