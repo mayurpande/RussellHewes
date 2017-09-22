@@ -18,34 +18,16 @@
 
   {% include 'nav.html' %}
 
+  <div class="container">
+    {% block content %}
 
-
-
-  <div class="t">
-
-
-    <div class="content">
-        {% block content %}
-
-        {% endblock %}
-      </div>
-
-
-    <div class="content">
-      {% block wrapper %}
-
-      {% endblock %}
-    </div>
-
-    <div class="content">
-      {% block wrap %}
-
-      {% endblock %}
-    </div>
-
-
-
+    {% endblock %}
   </div>
+
+
+
+
+
 
 
 
