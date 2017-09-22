@@ -19,12 +19,14 @@ img{
   max-width: 100%;
 }
 
+h4{
+  font: bold 24px/24px "futura-pt", sans-serif;
+}
+
 /****************************
 CUSTOM BOOSTRAP
 ****************************/
-.container{
-  margin-top:10px;
-}
+
 
 hr {
     display: block;
@@ -44,6 +46,33 @@ hr {
   position:relative;
   padding-left:0;
 
+}
+
+.jobs-background{
+
+  /*background-image:url(../img/garden.jpg);
+  height:100%;
+  width:100%;
+  background-size:cover;
+  background-position: center;*/
+
+  background: linear-gradient(#000,transparent 30%),
+      linear-gradient(0deg, #202020,transparent),
+      #202020 url('../img/garden.jpg') no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height:100%;
+  position:relative;
+  padding-left:0;
+  text-align: center;
+
+
+}
+
+.jobs-background h1{
+  color:#709635;
+  font-weight:bold;
+  text-transform: uppercase;
 }
 
 /*.t{
@@ -85,6 +114,7 @@ header
    /*position:absolute;*/
    /*top:0;*/
    background-color:#000;
+   padding-bottom:15px;
 }
 
 #header-item{
