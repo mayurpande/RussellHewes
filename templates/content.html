@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-12">
+    {% autoescape false %}
+    {% for x in brief %}
+      {{ x.brief }}
+    {% endfor %}
+    {% endautoescape %}
+  </div>
+</div>
+
+<div class="row">
+  {% for x in data %}
+    {% if loop.index < 4 %}
+    <div class="col-sm-12">
+      <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
+      <p>{{ x.img_text }}</p>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+{% endblock %}
