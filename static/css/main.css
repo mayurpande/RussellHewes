@@ -9,19 +9,44 @@ html{
 }
 
 body{
-   margin:0;
-   padding:0;
-   #background:#000;
+
+   background-color:#000;
    font-family: Verdana, Geneva, sans-serif;
    color:#fff;
-
 }
 
 img{
   max-width: 100%;
 }
 
-.t{
+/****************************
+CUSTOM BOOSTRAP
+****************************/
+.container{
+  margin-top:10px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.mob-img{
+  background-image:url(../img/garden.jpg);
+  height:calc(100vh - 178px);
+  width:100%;
+  background-size:cover;
+  background-position: center;
+  position:relative;
+  padding-left:0;
+
+}
+
+/*.t{
   display:flex;
   flex-direction: column;
   width:100%;
@@ -95,7 +120,7 @@ home page
 
 
 
-#mobile-caption{
+.mobile-caption{
   position: absolute;
   bottom:0;
   background-color:rgba(255, 255, 255, 0.7);
@@ -103,7 +128,7 @@ home page
   text-align: center;
   color:#222;
 }
-#home-text{
+/*#home-text{
   width:93%;
   margin:0 auto;
 }
@@ -140,7 +165,7 @@ home page
 FOOTER
 ******************************************/
 
-
+/*
 .contact-info ul {
   list-style: none;
   padding: 0;
@@ -167,4 +192,4 @@ FOOTER
 
 .contact-info li.mail a {
    background-image: url('../img/mail.png');
-}
+}*/
