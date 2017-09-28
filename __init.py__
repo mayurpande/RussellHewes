@@ -53,14 +53,19 @@ def job(type):
     name = request.form['username']
     message = request.form['text-content']
     subject_type = request.form['email-type']
-    subject = 'New enqiury about ' + subject_type
-    msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = ['mayurpande.uk@gmail.com'])
-    msg.body = message
-    mail.send(msg)
-    subject = 'Russell Hewes - ' + subject_type.title()
-    msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = [email])
-    msg.body = 'Dear ' + name + ' Thank you for your enquiry regarding our ' + subject_type + ' team. One of our members of staff will be in touch shortly. Kind Regards, Russell Hewes'
-    mail.send(msg)
+    if name and email:
+      subject = 'New enqiury about ' + subject_type
+      msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = ['mayurpande.uk@gmail.com'])
+      msg.body = message
+      mail.send(msg)
+      subject = 'Russell Hewes - ' + subject_type.title()
+      msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = [email])
+      msg.body = 'Dear ' + name + ' Thank you for your enquiry regarding our ' + subject_type + ' team. One of our members of staff will be in touch shortly. Kind Regards, Russell Hewes'
+      mail.send(msg)
+      flash('Thank you for your enquiry, someone from our ' + subject_type + ' team will be in contact with you very shortly','success')
+
+    else:
+      flash('You have not filled in all mandatory fields, please try again','danger')
 
     return redirect(url_for('job',type=subject_type))
   else:
