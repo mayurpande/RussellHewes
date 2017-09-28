@@ -3,34 +3,89 @@
 
 {% block content %}
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-12 jobs-background">
     <h1>type</h1>
     <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
   </div>
-</div>
+</div> -->
 
-<div class="row" style="background-color:#fff; color: #222; padding-top:50px;">
-  <div class="col-sm-12">
-    {% autoescape false %}
-    {% for x in brief %}
-      {{ x.brief }}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
+      {% autoescape false %}
+      {% for x in brief %}
+        {{ x.brief }}
+      {% endfor %}
+      {% endautoescape %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+    {% for x in data %}
+      {% if loop.index < 4 %}
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
+        <p>{{ x.img_text }}</p>
+      </div>
+
+      {% endif %}
     {% endfor %}
-    {% endautoescape %}
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}">
+                   <li style="list-style:none;">{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
+      {% endwith %}
+      <h4>Get in touch for a quote now</h4>
+      <p>Please tell us more about your enqiury</p>
+      <form method="post" action="/">
+        <div class="form-group">
+          <label for="username">Name:</label>
+          <input type="text" class="form-control" id="username"  placeholder="Enter name" name="username">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="number">Number:</label>
+          <input type="text" class="form-control" id="number"  placeholder="Enter number" name="number">
+        </div>
+
+        <div class="form-group">
+          <label for="text-content">Message:</label>
+          <textarea name="text-content" class="form-control" id="text-content" rows=10></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
   </div>
 </div>
 
-<div class="row">
-  {% for x in data %}
-    {% if loop.index < 4 %}
-    <div class="col-sm-12 col-md-4 col-lg-4">
-      <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
-      <p>{{ x.img_text }}</p>
-    </div>
-    
-    {% endif %}
-  {% endfor %}
-</div>
+
 
 
 {% endblock %}
