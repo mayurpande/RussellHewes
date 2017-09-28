@@ -30,6 +30,24 @@ def main():
     return render_template('index.html',data=result,rows=picture_rows)
 
 
+@app.route('/<type>',methods=['GET','POST'])
+def job(type):
+
+  if request.method == 'POST':
+    print('works')
+    return redirect('/electricians')
+  else:
+    #use pymysql cursor
+    with connection.cursor() as cursor:
+      cursor.execute("SELECT * FROM {0}".format(type))
+      result = cursor.fetchall()
+      print(result)
+
+      cursor.execute("SELECT brief FROM {0}_info INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
+      rows = cursor.fetchall()
+
+  return render_template('content.html',data=result,brief=rows,type=type)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

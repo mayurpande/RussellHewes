@@ -9,44 +9,77 @@ html{
 }
 
 body{
-   margin:0;
-   padding:0;
-   #background:#000;
+
+   background-color:#000;
    font-family: Verdana, Geneva, sans-serif;
    color:#fff;
-
 }
 
 img{
   max-width: 100%;
 }
 
-.t{
-  display:flex;
-  flex-direction: column;
-  width:100%;
-  background-color:#000;
-
-
-
+h4{
+  font: bold 24px/24px "futura-pt", sans-serif;
 }
 
-.content{
-  margin:0;
-  padding:0;
+/****************************
+CUSTOM BOOSTRAP
+****************************/
 
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
 }
 
-#img-test{
+.mob-img{
   background-image:url(../img/garden.jpg);
-  height:calc(100vh - 163px);
+  height:calc(100vh - 188px);
   width:100%;
   background-size:cover;
   background-position: center;
   position:relative;
+  padding-left:0;
+
+}
+
+.jobs-background{
+
+  /*background-image:url(../img/garden.jpg);
+  height:100%;
+  width:100%;
+  background-size:cover;
+  background-position: center;*/
+
+  background: linear-gradient(#000,transparent 30%),
+      linear-gradient(0deg, #202020,transparent),
+      #202020 url('../img/garden.jpg') no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height:100%;
+  position:relative;
+  padding-left:0;
+  /*text-align: center;*/
 
 
+}
+
+.jobs-background h2{
+  color:#709635;
+  font-weight:bold;
+  text-transform: uppercase;
+}
+
+.jobs-background p{
+  with:80%;
+  margin: 0 auto 20px;
+  font-size:18px;
+  line-height: 22px;
 }
 /*********************************
 header
@@ -60,6 +93,7 @@ header
    /*position:absolute;*/
    /*top:0;*/
    background-color:#000;
+   padding-bottom:15px;
 }
 
 #header-item{
@@ -95,76 +129,11 @@ home page
 
 
 
-#mobile-caption{
+.mobile-caption{
   position: absolute;
   bottom:0;
   background-color:rgba(255, 255, 255, 0.7);
   width:100%;
   text-align: center;
   color:#222;
-}
-#home-text{
-  width:93%;
-  margin:0 auto;
-}
-
-#home-gallery{
-  display:flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.flex-gallery{
-  width:95%;
-  margin:0 auto;
-  margin-bottom:3px;
-}
-
-#home-text{
-  background-color: #000;
-  width:100%;
-  text-align: center;
-  font-size:0.9em;
-
-}
-
-#contact{
-  width:100%;
-  text-align: center;
-
-}
-
-
-
-/******************************************
-FOOTER
-******************************************/
-
-
-.contact-info ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.9em;
-
-}
-
-.contact-info a {
-
-	display: block;
-	min-height: 20px;
-	background-repeat: no-repeat;
-	background-size: 20px 20px;
-	padding: 0 0 0 30px;
-	margin: 0 0 10px;
-}
-
-
-
-.contact-info li.phone a {
-   background-image: url('../img/phone.png');
-}
-
-.contact-info li.mail a {
-   background-image: url('../img/mail.png');
 }

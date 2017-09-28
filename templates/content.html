@@ -2,34 +2,23 @@
 
 
 {% block content %}
-<!-- <div class="row">
-  <div class="col-sm-12"><hr /></div>
-</div> -->
 
-<!-- background image -->
-<div class="row">
-  <div class="col-sm-12 mob-img">
-      <div class="mobile-caption">
-        <p>Some text about excellency</p>
-        <p>This could be a slide show or randomly generated images</p>
-        <p>And this caption could change as well?</p>
-      </div>
+<!-- <div class="row">
+  <div class="col-sm-12 jobs-background">
+    <h1>type</h1>
+    <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
   </div>
-</div>
+</div> -->
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12"><hr /></div>
-  </div>
-
-  <div class="row">
     <div class="col-sm-12">
-        <h4>Russell Hewes - Company Profile</h4>
-        {% autoescape false %}
-        {% for x in data %}
-          {{ x.content }}
-        {% endfor %}
-        {% endautoescape %}
+      <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
+      {% autoescape false %}
+      {% for x in brief %}
+        {{ x.brief }}
+      {% endfor %}
+      {% endautoescape %}
     </div>
   </div>
 
@@ -38,11 +27,27 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-offset-md-3">
+    {% for x in data %}
+      {% if loop.index < 4 %}
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
+        <p>{{ x.img_text }}</p>
+      </div>
+
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
       {% with messages = get_flashed_messages(with_categories=True) %}
            {% if messages %}
              {% for category, message in messages %}
-                 <ul class="flashes alert alert-{{ category }}" >
+                 <ul class="flashes alert alert-{{ category }}">
                    <li style="list-style:none;">{{ message }}</li>
                 </ul>
             {% endfor %}
@@ -50,7 +55,7 @@
       {% endwith %}
       <h4>Get in touch for a quote now</h4>
       <p>Please tell us more about your enqiury</p>
-      <form method="post" action="/">
+      <form method="post" action={{ url_for('job',type='{{ type }}') }}>
         <div class="form-group">
           <label for="username">Name:</label>
           <input type="text" class="form-control" id="username"  placeholder="Enter name" name="username">
@@ -75,7 +80,12 @@
     </div>
   </div>
 
-
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
 </div>
+
+
+
 
 {% endblock %}
