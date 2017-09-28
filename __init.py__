@@ -56,11 +56,11 @@ def job(type):
     if name and email:
       subject = 'New enqiury about ' + subject_type
       msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = ['mayurpande.uk@gmail.com'])
-      msg.body = message
+      msg.body = 'Hello Russell you cunt!\n\nSomeone has sent you an enquiry about ' + subject_type + ' probably best to mail them back.\n\nTheir name is;\n\n' + name.title() + '\n\nTheir email is;\n\n' + email + '\n\nTheir message said this;\n\n' + message
       mail.send(msg)
       subject = 'Russell Hewes - ' + subject_type.title()
       msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = [email])
-      msg.body = 'Dear ' + name + ' Thank you for your enquiry regarding our ' + subject_type + ' team. One of our members of staff will be in touch shortly. Kind Regards, Russell Hewes'
+      msg.body = 'Dear ' + name.title() + ',\n\nThank you for your enquiry regarding our ' + subject_type + ' team.\n\nOne of our members of staff will be in touch shortly.\n\nKind Regards,\n\nRussell Hewes'
       mail.send(msg)
       flash('Thank you for your enquiry, someone from our ' + subject_type + ' team will be in contact with you very shortly','success')
 
