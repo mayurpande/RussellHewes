@@ -52,11 +52,17 @@ def job(type):
     email = request.form['email']
     name = request.form['username']
     message = request.form['text-content']
-    subject = request.form['email-type']
+    subject_type = request.form['email-type']
+    subject = 'New enqiury about ' + subject_type
     msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = ['mayurpande.uk@gmail.com'])
     msg.body = message
     mail.send(msg)
-    return redirect('/electricians')
+    subject = 'Russell Hewes - ' + subject_type.title()
+    msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = [email])
+    msg.body = 'Dear ' + name + ' Thank you for your enquiry regarding our ' + subject_type + ' team. One of our members of staff will be in touch shortly. Kind Regards, Russell Hewes'
+    mail.send(msg)
+
+    return redirect(url_for('job',type=subject_type))
   else:
     #use pymysql cursor
     with connection.cursor() as cursor:
