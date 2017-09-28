@@ -1,9 +1,24 @@
 from flask import Flask, render_template, flash, url_for, request, redirect
+from flask_mail import Mail,Message
 from db import connection
+#flask mail config file
+from config_mail import username,pw
 
 app = Flask(__name__)
 
+
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
+app.config.update(
+  MAIL_SERVER='smtp.gmail.com',
+  MAIL_PORT = 465,
+  MAIL_USERNAME = username,
+  MAIL_PASSWORD = pw,
+  MAIL_USE_TLS = False,
+  MAIL_USE_SSL = True
+)
+
+mail = Mail(app)
 
 @app.route('/',methods=['GET','POST'])
 def main():
@@ -34,8 +49,25 @@ def main():
 def job(type):
 
   if request.method == 'POST':
-    print('works')
-    return redirect('/electricians')
+    email = request.form['email']
+    name = request.form['username']
+    message = request.form['text-content']
+    subject_type = request.form['email-type']
+    if name and email:
+      subject = 'New enqiury about ' + subject_type
+      msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = ['mayurpande.uk@gmail.com'])
+      msg.body = 'Hello Russell you cunt!\n\nSomeone has sent you an enquiry about ' + subject_type + ' probably best to mail them back.\n\nTheir name is;\n\n' + name.title() + '\n\nTheir email is;\n\n' + email + '\n\nTheir message said this;\n\n' + message
+      mail.send(msg)
+      subject = 'Russell Hewes - ' + subject_type.title()
+      msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = [email])
+      msg.body = 'Dear ' + name.title() + ',\n\nThank you for your enquiry regarding our ' + subject_type + ' team.\n\nOne of our members of staff will be in touch shortly.\n\nKind Regards,\n\nRussell Hewes'
+      mail.send(msg)
+      flash('Thank you for your enquiry, someone from our ' + subject_type + ' team will be in contact with you very shortly','success')
+
+    else:
+      flash('You have not filled in all mandatory fields, please try again','danger')
+
+    return redirect(url_for('job',type=subject_type))
   else:
     #use pymysql cursor
     with connection.cursor() as cursor:
