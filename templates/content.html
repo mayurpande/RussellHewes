@@ -55,7 +55,7 @@
       {% endwith %}
       <h4>Get in touch for a quote now</h4>
       <p>Please tell us more about your enqiury</p>
-      <form method="post" action="/">
+      <form method="post" action={{ url_for('job',type='{{ type }}') }}>
         <div class="form-group">
           <label for="username">Name:</label>
           <input type="text" class="form-control" id="username"  placeholder="Enter name" name="username">
