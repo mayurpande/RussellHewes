@@ -2,14 +2,23 @@ from flask import Flask, render_template, flash, url_for, request, redirect
 from flask_mail import Mail,Message
 from db import connection
 #flask mail config file
-import config_mail 
+from config_mail import username,pw
 
 app = Flask(__name__)
 
+
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
+app.config.update(
+  MAIL_SERVER='smtp.gmail.com',
+  MAIL_PORT = 465,
+  MAIL_USERNAME = username,
+  MAIL_PASSWORD = pw,
+  MAIL_USE_TLS = False,
+  MAIL_USE_SSL = True
+)
 
-
+mail = Mail(app)
 
 @app.route('/',methods=['GET','POST'])
 def main():
@@ -40,7 +49,13 @@ def main():
 def job(type):
 
   if request.method == 'POST':
-    print('works')
+    email = request.form['email']
+    name = request.form['username']
+    message = request.form['text-content']
+    subject = request.form['email-type']
+    msg = Message(subject=subject,sender='mayurpande.uk@gmail.com', recipients = ['mayurpande.uk@gmail.com'])
+    msg.body = message
+    mail.send(msg)
     return redirect('/electricians')
   else:
     #use pymysql cursor
