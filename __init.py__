@@ -33,18 +33,20 @@ def main():
 @app.route('/<type>',methods=['GET','POST'])
 def job(type):
 
-  #use pymysql cursor
-  with connection.cursor() as cursor:
-    cursor.execute("SELECT * FROM {0}".format(type))
-    result = cursor.fetchall()
-    print(result)
+  if request.method == 'POST':
+    print('works')
+    return redirect('/electricians')
+  else:
+    #use pymysql cursor
+    with connection.cursor() as cursor:
+      cursor.execute("SELECT * FROM {0}".format(type))
+      result = cursor.fetchall()
+      print(result)
 
+      cursor.execute("SELECT brief FROM {0}_info INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
+      rows = cursor.fetchall()
 
-    cursor.execute("SELECT brief FROM {0}_info INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
-    rows = cursor.fetchall()
-    print(rows)
-
-  return 'hello'
+  return render_template('content.html',data=result,brief=rows,type=type)
 
 
 if __name__ == "__main__":
