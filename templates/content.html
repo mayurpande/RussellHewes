@@ -1,5 +1,13 @@
 {% extends 'layout.html' %}
 
+{% if (type == 'electricians') %}
+  {% set active_page = 'electricians' %}
+{% elif (type == 'developments') %}
+    {% set active_page = 'developments' %}
+{% elif (type == 'facilities') %}
+    {% set active_page = 'facilities' %}
+{% endif %}
+
 
 {% block content %}
 
