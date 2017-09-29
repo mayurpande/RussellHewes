@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, url_for, request, redirect
+from flask import Flask, render_template, flash, url_for, request, redirect, jsonify
 from flask_mail import Mail,Message
 from db import connection
 #flask mail config file
@@ -42,6 +42,7 @@ def main():
       img_name_query = "SELECT * FROM `home_page_img`"
       cursor.execute(img_name_query,(),)
       picture_rows = cursor.fetchall()
+
     return render_template('index.html',data=result,rows=picture_rows)
 
 
@@ -80,6 +81,19 @@ def job(type):
 
   return render_template('content.html',data=result,brief=rows,type=type)
 
+@app.route('/home-images')
+def home_images():
+    with connection.cursor() as cursor:
+      text_content_query = "SELECT * FROM `home_page`"
+      cursor.execute(text_content_query,(),)
+      result = cursor.fetchall()
+
+      img_name_query = "SELECT * FROM `home_page_img`"
+      cursor.execute(img_name_query,(),)
+      picture_rows = cursor.fetchall()
+      
+    return jsonify(result)
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
