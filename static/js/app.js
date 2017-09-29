@@ -14,7 +14,7 @@ $(document).ready(function(){
             $('#demo').backstretch(x,{duration:5000,fade:750});
             $(window).on("backstretch.show", function(e, instance) {
               var newCaption = data[instance.index].img_caption;
-              $(".mobile-caption").html( newCaption );
+              $(".caption").html( newCaption );
             });
 
 
