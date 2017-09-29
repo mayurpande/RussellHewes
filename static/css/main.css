@@ -42,8 +42,10 @@ hr {
 
 #demo{
     width:100%;
-    height:calc(100vh - 200px);
-    position: relative;
+    /*height:calc(100vh - 200px);*/
+    /*position: relative;*/
+    height:calc(100vh - 15px);
+
 }
 
 
@@ -106,6 +108,9 @@ header
    /*top:0;*/
    background-color:#000;
    padding-bottom:15px;
+   width:100%;
+   position: fixed;
+   z-index: 1;
 
 
 }
