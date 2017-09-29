@@ -13,6 +13,7 @@ body{
    background-color:#000;
    font-family: Verdana, Geneva, sans-serif;
    color:#fff;
+   margin-bottom:400px;
 }
 
 img{
@@ -45,6 +46,16 @@ hr {
     position: relative;
 }
 
+
+a{
+  text-decoration: none;
+  color:#DCD268;
+
+}
+
+a:hover{
+  text-decoration: none;
+}
 
 
 
@@ -118,12 +129,10 @@ header
   border-right:1px solid #DCD268;
   float:left;
   padding:0 10px;
+  line-height: 1em;
 }
 
-#header-item li a{
-  color:#DCD268;
 
-}
 
 
 /*******************************
@@ -139,4 +148,37 @@ home page
   width:100%;
   text-align: center;
   padding:0 10px;
+}
+
+
+/*******************************
+FOOTER
+*******************************/
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  background: linear-gradient(#000,transparent 70%),
+      linear-gradient(0deg, #202020,transparent),
+      #000 url('../img/map.png') no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height:400px;
+  line-height: 60px; /* Vertically center the text there */
+  color:#FFEA3D;
+  font-size:0.7em;
+}
+
+.footer h5{
+  font-size:1rem;
+}
+
+.footer p{
+  line-height:0.8;
+
+}
+
+.foot-cont{
+  margin-top:40px;
 }
