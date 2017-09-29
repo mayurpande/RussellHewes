@@ -47,6 +47,16 @@ hr {
 }
 
 
+a{
+  text-decoration: none;
+  color:#DCD268;
+
+}
+
+a:hover{
+  text-decoration: none;
+}
+
 
 
 
@@ -121,10 +131,7 @@ header
   padding:0 10px;
 }
 
-#header-item li a{
-  color:#DCD268;
 
-}
 
 
 /*******************************
@@ -159,7 +166,11 @@ FOOTER
   height:400px;
   line-height: 60px; /* Vertically center the text there */
   color:#FFEA3D;
-  font-size:1em;
+  font-size:0.7em;
+}
+
+.footer h5{
+  font-size:1rem;
 }
 
 .footer p{
