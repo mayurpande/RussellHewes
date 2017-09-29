@@ -41,7 +41,7 @@ hr {
 
 #demo{
     width:100%;
-    height:calc(100vh - 188px);
+    height:calc(100vh - 200px);
     position: relative;
 }
 
@@ -132,11 +132,11 @@ home page
 
 
 
-.mobile-caption{
+.caption{
   position: absolute;
   bottom:0;
-  background-color:rgba(255, 255, 255, 0.7);
+  background-color:rgba(0, 0, 0, 0.8);
   width:100%;
   text-align: center;
-  color:#222;
+  padding:0 10px;
 }
