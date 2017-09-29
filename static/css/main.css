@@ -28,6 +28,7 @@ CUSTOM BOOSTRAP
 ****************************/
 
 
+
 hr {
     display: block;
     height: 1px;
@@ -37,16 +38,15 @@ hr {
     padding: 0;
 }
 
-.mob-img{
-  background-image:url(../img/garden.jpg);
-  height:calc(100vh - 188px);
-  width:100%;
-  background-size:cover;
-  background-position: center;
-  position:relative;
-  padding-left:0;
 
+#demo{
+    width:100%;
+    height:calc(100vh - 188px);
 }
+
+
+
+
 
 .jobs-background{
 
@@ -94,6 +94,8 @@ header
    /*top:0;*/
    background-color:#000;
    padding-bottom:15px;
+
+
 }
 
 #header-item{
