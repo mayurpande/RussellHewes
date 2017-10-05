@@ -93,6 +93,8 @@ def job(type):
 
   return render_template('content.html',data=result,brief=rows,type=type,title=title)
 
+
+
 @app.route('/home-images')
 def home_images():
     with connection.cursor() as cursor:
@@ -102,6 +104,18 @@ def home_images():
       picture_rows = cursor.fetchall()
 
     return jsonify(picture_rows)
+
+@app.route('/admin')
+def admin():
+
+  return render_template('admin.html')
+
+@app.route('/admin-home-img')
+def admin_home_img():
+
+  return render_template('admin.html')
+
+
 
 
 if __name__ == "__main__":
