@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container">
+<div class="row">
+  <div class="col-sm-6 col-md-6 ml-auto mr-auto">
+
+    <h4>Add/update home page</h4>
+    <form method="post" action={{ url_for('admin')}}>
+      <div class="form-group">
+        <label for="username">Name:</label>
+        <input type="text" class="form-control" id="username"  placeholder="Enter name (mandatory)" name="username">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email (mandatory)" name="email">
+      </div>
+
+      <div class="form-group">
+        <label for="number">Number:</label>
+        <input type="text" class="form-control" id="number"  placeholder="Enter number" name="number">
+      </div>
+
+      <input type="hidden" name="email-type" id="email-type" value="{{ type }}" />
+
+      <div class="form-group">
+        <label for="text-content">Message:</label>
+        <textarea name="text-content" class="form-control" id="text-content" rows=10></textarea>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>
+</div>
+
+
+
+{% endblock %}
