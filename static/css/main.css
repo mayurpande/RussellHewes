@@ -74,9 +74,7 @@ a:hover{
   align-items: center;
   background-size:cover;
   background-repeat: no-repeat;
-
-
-
+  padding-left:0;
 
 }
 
@@ -92,7 +90,7 @@ a:hover{
   color:#fff;
   font-weight:bold;
   text-transform: uppercase;
-  margin-left:50px;
+  margin-left:12px;
 
 }
 
@@ -106,8 +104,8 @@ header
    justify-content:center;
    color:#DCD268;
    flex-direction: column;
-   /*position:absolute;*/
-   /*top:0;*/
+   right:0;
+   margin-right:7px;
    background-color:#000;
    padding-bottom:15px;
    width:100%;
