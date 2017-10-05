@@ -1,33 +1,47 @@
 {% extends 'layout.html' %}
 
+{% if (type == 'electricians') %}
+  {% set active_page = 'electricians' %}
+{% elif (type == 'developments') %}
+    {% set active_page = 'developments' %}
+{% elif (type == 'facilities') %}
+    {% set active_page = 'facilities' %}
+{% endif %}
+
 
 {% block content %}
 
-<!-- <div class="row">
-  <div class="col-sm-12 jobs-background">
-    <h1>type</h1>
-    <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
-  </div>
-</div> -->
+
 
 <div class="row">
-  <div class="col-sm-12">
-    {% with messages = get_flashed_messages(with_categories=True) %}
-         {% if messages %}
-           {% for category, message in messages %}
-               <ul class="flashes alert alert-{{ category }}">
-                 <li style="list-style:none;">{{ message }}</li>
-              </ul>
-          {% endfor %}
-         {% endif %}
-    {% endwith %}
+  <div class="col-sm-12 jobs-background t" style="background-image:url(/static/img/{{ title }});">
+    <h1>{{ type }}</h1>
   </div>
 </div>
 
+
 <div class="container">
+
+
+
   <div class="row">
     <div class="col-sm-12">
-      <p>Our team of electricians are NICEIC registered and carry out all types of domestic and commercial electrical work from a new plug socket to a complete, or partial, rewiring of your property professionally and efficiently.</p>
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}">
+                   <li style="list-style:none;">{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-sm-12">
       {% autoescape false %}
       {% for x in brief %}
         {{ x.brief }}
@@ -57,6 +71,8 @@
   </div>
 
   <div class="row">
+
+
     <div class="col-sm-6 col-md-6 ml-auto mr-auto">
 
       <h4>Get in touch for a quote now</h4>

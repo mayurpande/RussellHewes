@@ -1,14 +1,14 @@
 <div id="header">
-  <div id="header-item">
+  <div id="header-item" >
     <a href={{ url_for('main') }}>
   	 <img src="{{ url_for('static',filename='img/RH_Logo_BlackYellow_RGB.jpg')}}" alt="temp-logo" />
     </a>
   </div>
   <div id="header-item">
     <ul id="nav-control">
-      <li><a href={{ url_for('job',type='electricians') }}>Electricians</a></li>
-      <li><a href={{ url_for('job',type='developments') }}>Developments</a></li>
-      <li style="border-right:none;"><a href={{ url_for('job',type='facilities') }}>Facilities</a></li>
+      <li><a href={{ url_for('job',type='electricians') }} class="{% if active_page == 'electricians' %}active{% endif %}">Electricians</a></li>
+      <li><a href={{ url_for('job',type='developments') }} class="{% if active_page == 'developments' %}active{% endif %}">Developments</a></li>
+      <li style="border-right:none;"><a href={{ url_for('job',type='facilities') }} class="{% if active_page == 'facilities' %}active{% endif %}">Facilities</a></li>
     </ul>
   </div>
 </div>
