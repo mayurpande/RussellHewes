@@ -131,11 +131,32 @@ def admin_home_img():
   if request.method == 'POST':
 
     caption = request.form['caption']
+    pic_id = request.form['id']
+
+
     # check if the post request has the file part
     if 'file' not in request.files:
         flash('No file part','danger')
         return redirect(request.url)
     file = request.files['file']
+
+    if pic_id and file.filename == '':
+        try:
+            with connection.cursor() as cursor:
+                delete_query = "DELETE FROM home_page_img WHERE id = %s"
+                cursor.execute(delete_query,(pic_id,))
+                connection.commit()
+                reset_increment = "ALTER TABLE home_page_img AUTO_INCREMENT = %s"
+                cursor.execute(delete_query,(1))
+                connection.commit()
+                flash('File deleted','success')
+                return redirect(request.url)
+        except Exception as e:
+                print('This is error here: ' + str(e))
+                flash('File not deleted','danger')
+                return redirect(request.url)
+
+
     # if user does not select file, browser also
     # submit a empty part without filename
     if file.filename == '':
@@ -145,11 +166,22 @@ def admin_home_img():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         with connection.cursor() as cursor:
-         upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
-         cursor.execute(upload_img_name_query,(filename,caption),)
-         connection.commit()
-         flash('File and caption saved','success')
-         return redirect(url_for('admin_home_img'))
+
+            if caption:
+                 upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
+                 cursor.execute(upload_img_name_query,(filename,caption),)
+                 connection.commit()
+                 flash('New image/text uploaded','success')
+                 return redirect(request.url)
+            elif caption and pic_id:
+                 upload_img_name_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
+                 cursor.execute(upload_img_name_query,(filename,caption,pic_id),)
+                 connection.commit()
+                 flash('image/text updated','success')
+                 return redirect(request.url)
+
+
+
 
   return render_template('admin-home.html')
 
