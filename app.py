@@ -155,6 +155,17 @@ def admin_home_img():
                  return redirect(request.url)
     return render_template('admin-home.html')
 
+@app.route('/admin-home-delete',methods=['GET','POST'])
+def admin_home_delete():
+    
+    with connection.cursor() as cursor:
+        select_home_img = 'SELECT * FROM home_page_img'
+        cursor.execute(select_home_img,(),)
+        rows = cursor.fetchall()
+
+        return render_template('admin-home-delete.html',data=rows)
+
+
 
 
 if __name__ == "__main__":
