@@ -157,7 +157,13 @@ def admin_home_img():
 
 @app.route('/admin-home-delete',methods=['GET','POST'])
 def admin_home_delete():
-    
+
+    if request.method == 'POST':
+        check_boxes = request.form.getlist('check')
+        print(check_boxes)
+
+
+
     with connection.cursor() as cursor:
         select_home_img = 'SELECT * FROM home_page_img'
         cursor.execute(select_home_img,(),)
