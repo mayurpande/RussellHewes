@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-6 col-md-6 ml-auto mr-auto t">
+    <div class="col-sm-12 ml-auto mr-auto t">
 
       <h4>Add to home page images</h4>
       <form method="post" action={{ url_for('admin_home_img')}} enctype="multipart/form-data">
@@ -13,7 +13,6 @@
         </div>
         <div class="form-group">
           <textarea name="caption" id="caption" class="text_area" rows="10" cols="80"></textarea>
-
         </div>
         <button type="submit" name="add" class="btn btn-default">Upload Image/Caption</button>
       </form>
