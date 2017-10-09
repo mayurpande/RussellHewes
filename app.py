@@ -179,6 +179,30 @@ def admin_home_delete():
             return render_template('admin-home-delete.html',data=rows)
 
 
+@app.route('/admin-home-update',methods=['GET','POST'])
+def admin_home_update():
+
+    if request.method == 'POST':
+        check_boxes = request.form.getlist('check')
+        with connecton.cursor() as cursor:
+            for x in check_boxes:
+                try:
+                    update_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
+                    cursor.execute(update_query,(x),)
+                    connecton.commit()
+                    flash('You have updates item', 'success')
+                    return redirect(request.url)
+                except Excpetion as e:
+                    flash('You have not updated item','danger')
+                    return redirect(request.url)
+    else:
+        with connection.cursor() as cursor:
+            select_home_img = 'SELECT * FROM home_page_img'
+            cursor.execute(select_home_img,(),)
+            rows = cursor.fetchall()
+            return render_template('admin-home-update.html',data=rows)
+
+
 
 
 if __name__ == "__main__":
