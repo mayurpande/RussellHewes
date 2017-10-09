@@ -133,13 +133,13 @@ def admin_home_img():
     caption = request.form['caption']
     # check if the post request has the file part
     if 'file' not in request.files:
-        flash('No file part')
+        flash('No file part','danger')
         return redirect(request.url)
     file = request.files['file']
     # if user does not select file, browser also
     # submit a empty part without filename
     if file.filename == '':
-        flash('No selected file')
+        flash('No selected file','danger')
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
@@ -148,6 +148,7 @@ def admin_home_img():
          upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
          cursor.execute(upload_img_name_query,(filename,caption),)
          connection.commit()
+         flash('File and caption saved','success')
          return redirect(url_for('admin_home_img'))
 
   return render_template('admin-home.html')
