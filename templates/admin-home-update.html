@@ -26,24 +26,33 @@
 
     <form method="post" action={{ url_for('admin_home_update')}}>
     {% for x in data %}
-      <div class="row">
+      <div class="row update-form">
         <div class="col-sm-12 ml-auto mr-auto">
 
             <div class="form-group">
-              <p><input type="text" value="{{ x.img_name }}" class="form-control" /></p>
+              <label class="form-control">Img Name: {{ x.img_name }}</label>
+            </div>
+
+            <div class="form-group">
+              <img class="form-control img-responsive" src="/static/img/{{ x.img_name }}" alt="{{ x.img_name }}" />
             </div>
 
 
             <div class="form-group">
-              <textarea name="caption" id="caption" class="text_area" rows="10" cols="80">{{ x.img_caption }}</textarea>
+              <textarea name="caption|{{ x.id }}" id="caption" class="text_area" rows="10" cols="80">{{ x.img_caption }}</textarea>
             </div>
 
 
 
             <div class="form-group">
-              <input type="checkbox" name="check" id="{{ x.id }}" value="{{ x.id }}" /><span>Update</span>
+              <input type="checkbox" name="check|{{ x.id }}" id="{{ x.id }}" value="{{ x.id }}" /><span>Update</span>
             </div>
 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 ml-auto mr-auto">
+          <hr />
         </div>
       </div>
     {% endfor %}
