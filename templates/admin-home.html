@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12 t">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}">
+                   <li style="list-style:none;">{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 ml-auto mr-auto">
+
+      <h4>Add to home page images</h4>
+      <form method="post" action={{ url_for('admin_home_img')}} enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" name="file" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+          <textarea name="caption" id="caption" class="text_area" rows="10" cols="80"></textarea>
+        </div>
+        <button type="submit" name="add" class="btn btn-default">Upload Image/Caption</button>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+{% endblock %}
