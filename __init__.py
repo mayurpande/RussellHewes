@@ -190,9 +190,7 @@ def admin_home_update():
             for x in range(len(saved_data)):
 
                 if 'check|' + str(x) in saved_data:
-                    # print(saved_data['caption|' + str(x)])
-                    # print(saved_files['file|' + str(x)])
-                    # check if the post request has the file par
+
                     if 'file|' + str(x) not in saved_files:
                          flash('No file part','danger')
                          return redirect(request.url)
