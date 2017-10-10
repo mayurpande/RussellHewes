@@ -160,7 +160,7 @@ def admin_home_delete():
 
     if request.method == 'POST':
         check_boxes = request.form.getlist('check')
-        with connecton.cursor() as cursor:
+        with connection.cursor() as cursor:
             for x in check_boxes:
                 try:
                     delete_query = "DELETE FROM home_page_img WHERE id = %s"
@@ -184,17 +184,21 @@ def admin_home_update():
 
     if request.method == 'POST':
         check_boxes = request.form.getlist('check')
-        with connecton.cursor() as cursor:
-            for x in check_boxes:
-                try:
-                    update_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
-                    cursor.execute(update_query,(x),)
-                    connecton.commit()
-                    flash('You have updates item', 'success')
-                    return redirect(request.url)
-                except Excpetion as e:
-                    flash('You have not updated item','danger')
-                    return redirect(request.url)
+        texts = request.form.getlist('caption')
+        print(texts)
+        print(check_boxes)
+        return(request.url)
+        # with connecton.cursor() as cursor:
+        #     for x in check_boxes:
+        #         try:
+        #             update_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
+        #             cursor.execute(update_query,(x),)
+        #             connecton.commit()
+        #             flash('You have updates item', 'success')
+        #             return redirect(request.url)
+        #         except Excpetion as e:
+        #             flash('You have not updated item','danger')
+        #             return redirect(request.url)
     else:
         with connection.cursor() as cursor:
             select_home_img = 'SELECT * FROM home_page_img'
