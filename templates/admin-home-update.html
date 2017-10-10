@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <form method="post" action={{ url_for('admin_home_update')}}>
+    <form method="post" action={{ url_for('admin_home_update')}} enctype="multipart/form-data">
     {% for x in data %}
       <div class="row update-form">
         <div class="col-sm-12 ml-auto mr-auto">
@@ -40,6 +40,10 @@
 
             <div class="form-group">
               <textarea name="caption|{{ x.id }}" id="caption" class="text_area" rows="10" cols="80">{{ x.img_caption }}</textarea>
+            </div>
+
+            <div class="form-group">
+              <input type="file" name="file" class="form-control"/>
             </div>
 
 
