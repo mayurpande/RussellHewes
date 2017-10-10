@@ -183,22 +183,41 @@ def admin_home_delete():
 def admin_home_update():
 
     if request.method == 'POST':
-        check_boxes = request.form.getlist('check')
-        texts = request.form.getlist('caption')
-        print(texts)
-        print(check_boxes)
-        return(request.url)
-        # with connecton.cursor() as cursor:
-        #     for x in check_boxes:
-        #         try:
-        #             update_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
-        #             cursor.execute(update_query,(x),)
-        #             connecton.commit()
-        #             flash('You have updates item', 'success')
-        #             return redirect(request.url)
-        #         except Excpetion as e:
-        #             flash('You have not updated item','danger')
-        #             return redirect(request.url)
+
+        saved_data = request.form
+        saved_files = request.files
+        try:
+            for x in range(len(saved_data)):
+
+                if 'check|' + str(x) in saved_data:
+                    # print(saved_data['caption|' + str(x)])
+                    # print(saved_files['file|' + str(x)])
+                    # check if the post request has the file par
+                    if 'file|' + str(x) not in saved_files:
+                         flash('No file part','danger')
+                         return redirect(request.url)
+
+                    file = saved_files['file|' + str(x)]
+                    # # if user does not select file, browser also
+                    # # submit a empty part without filename
+                    if file.filename == '':
+                        flash('No selected file','danger')
+                        return redirect(request.url)
+                    if file and allowed_file(file.filename):
+                        filename = secure_filename(file.filename)
+                        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                        with connection.cursor() as cursor:
+
+                             update_img_name_query = "UPDATE home_page_img set img_name = %s, img_caption = %s WHERE id = %s"
+                             cursor.execute(update_img_name_query,(filename,saved_data['caption|' + str(x)],x),)
+                             connection.commit()
+            flash('You updated successfully','success')
+            return redirect(url_for('admin_home_update'))
+        except Exception as e:
+            flash('You  have not updated successfully','danger')
+            return redirect(url_for('admin_home_update'))
+
     else:
         with connection.cursor() as cursor:
             select_home_img = 'SELECT * FROM home_page_img'
