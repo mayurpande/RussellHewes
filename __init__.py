@@ -112,95 +112,95 @@ def home_images():
 
     return jsonify(picture_rows)
 
-# @app.route('/admin')
-# def admin():
-#
-#   return render_template('admin.html')
-#
-#
-# def allowed_file(filename):
-#     return '.' in filename and \
-#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-#
-#
-# @app.route('/admin-home-img',methods=['GET','POST'])
-# def admin_home_img():
-#
-#
-#     if request.method == 'POST':
-#
-#         caption = request.form['caption']
-#
-#
-#         # check if the post request has the file part
-#         if 'file' not in request.files:
-#             flash('No file part','danger')
-#             return redirect(request.url)
-#         file = request.files['file']
-#
-#         # if user does not select file, browser also
-#         # submit a empty part without filename
-#         if file.filename == '':
-#             flash('No selected file','danger')
-#             return redirect(request.url)
-#         if file and allowed_file(file.filename):
-#             filename = secure_filename(file.filename)
-#             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#             with connection.cursor() as cursor:
-#
-#                  upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
-#                  cursor.execute(upload_img_name_query,(filename,caption),)
-#                  connection.commit()
-#                  flash('New image/text uploaded','success')
-#                  return redirect(request.url)
-#     return render_template('admin-home.html')
-#
-# @app.route('/admin-home-delete',methods=['GET','POST'])
-# def admin_home_delete():
-#
-#     if request.method == 'POST':
-#         check_boxes = request.form.getlist('check')
-#         with connecton.cursor() as cursor:
-#             for x in check_boxes:
-#                 try:
-#                     delete_query = "DELETE FROM home_page_img WHERE id = %s"
-#                     cursor.execute(delete_query,(x),)
-#                     connecton.commit()
-#                     flash('You have deleted item', 'success')
-#                     return redirect(request.url)
-#                 except Excpetion as e:
-#                     flash('You have not deleted item','danger')
-#                     return redirect(request.url)
-#     else:
-#         with connection.cursor() as cursor:
-#             select_home_img = 'SELECT * FROM home_page_img'
-#             cursor.execute(select_home_img,(),)
-#             rows = cursor.fetchall()
-#             return render_template('admin-home-delete.html',data=rows)
-#
-#
-# @app.route('/admin-home-update',methods=['GET','POST'])
-# def admin_home_update():
-#
-#     if request.method == 'POST':
-#         check_boxes = request.form.getlist('check')
-#         with connecton.cursor() as cursor:
-#             for x in check_boxes:
-#                 try:
-#                     update_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
-#                     cursor.execute(update_query,(x),)
-#                     connecton.commit()
-#                     flash('You have updates item', 'success')
-#                     return redirect(request.url)
-#                 except Excpetion as e:
-#                     flash('You have not updated item','danger')
-#                     return redirect(request.url)
-#     else:
-#         with connection.cursor() as cursor:
-#             select_home_img = 'SELECT * FROM home_page_img'
-#             cursor.execute(select_home_img,(),)
-#             rows = cursor.fetchall()
-#             return render_template('admin-home-update.html',data=rows)
+@app.route('/admin')
+def admin():
+
+  return render_template('admin.html')
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/admin-home-img',methods=['GET','POST'])
+def admin_home_img():
+
+
+    if request.method == 'POST':
+
+        caption = request.form['caption']
+
+
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part','danger')
+            return redirect(request.url)
+        file = request.files['file']
+
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file','danger')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            with connection.cursor() as cursor:
+
+                 upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
+                 cursor.execute(upload_img_name_query,(filename,caption),)
+                 connection.commit()
+                 flash('New image/text uploaded','success')
+                 return redirect(request.url)
+    return render_template('admin-home.html')
+
+@app.route('/admin-home-delete',methods=['GET','POST'])
+def admin_home_delete():
+
+    if request.method == 'POST':
+        check_boxes = request.form.getlist('check')
+        with connecton.cursor() as cursor:
+            for x in check_boxes:
+                try:
+                    delete_query = "DELETE FROM home_page_img WHERE id = %s"
+                    cursor.execute(delete_query,(x),)
+                    connecton.commit()
+                    flash('You have deleted item', 'success')
+                    return redirect(request.url)
+                except Excpetion as e:
+                    flash('You have not deleted item','danger')
+                    return redirect(request.url)
+    else:
+        with connection.cursor() as cursor:
+            select_home_img = 'SELECT * FROM home_page_img'
+            cursor.execute(select_home_img,(),)
+            rows = cursor.fetchall()
+            return render_template('admin-home-delete.html',data=rows)
+
+
+@app.route('/admin-home-update',methods=['GET','POST'])
+def admin_home_update():
+
+    if request.method == 'POST':
+        check_boxes = request.form.getlist('check')
+        with connecton.cursor() as cursor:
+            for x in check_boxes:
+                try:
+                    update_query = "UPDATE home_page_img SET img_name = %s, img_caption = %s WHERE id = %s"
+                    cursor.execute(update_query,(x),)
+                    connecton.commit()
+                    flash('You have updates item', 'success')
+                    return redirect(request.url)
+                except Excpetion as e:
+                    flash('You have not updated item','danger')
+                    return redirect(request.url)
+    else:
+        with connection.cursor() as cursor:
+            select_home_img = 'SELECT * FROM home_page_img'
+            cursor.execute(select_home_img,(),)
+            rows = cursor.fetchall()
+            return render_template('admin-home-update.html',data=rows)
 
 
 
