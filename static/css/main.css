@@ -58,6 +58,7 @@ a{
 
 a:hover{
   text-decoration: none;
+  color:#fff;
 }
 
 
@@ -149,7 +150,7 @@ header
 }
 
 .active{
-  color: red;
+  color: #0056B3;
 }
 
 
