@@ -29,7 +29,14 @@ h4{
 CUSTOM BOOSTRAP
 ****************************/
 
+#test{
+  margin-top:10px;
+  background-color: #141414;
+  width:100%;
 
+  text-align:center;
+  padding: 10px 0;
+}
 
 hr {
     display: block;
@@ -58,6 +65,7 @@ a{
 
 a:hover{
   text-decoration: none;
+  color:#fff;
 }
 
 
@@ -110,9 +118,9 @@ header
    color:#DCD268;
    flex-direction: column;
    right:0;
-   margin-right:7px;
+   /*margin-right:7px;*/
    background-color:#000;
-   padding-bottom:15px;
+   /*padding-bottom:15px;*/
    width:100%;
    position: fixed;
    z-index: 9994;
@@ -123,24 +131,24 @@ header
 }
 
 .t{
-  margin-top:200px;
+  margin-top:269px;
 }
 
-#header-item{
+.header-item{
   background-color:#000;
 }
-#header-item img {
+.header-item img {
   width:100%;
 }
 
-#header-item ul{
+.header-item ul{
    padding:0;
    margin:0;
 
 
 }
 
-#header-item li{
+.header-item li{
   list-style: none;
   border-right:1px solid #DCD268;
   float:left;
@@ -149,7 +157,7 @@ header
 }
 
 .active{
-  color: red;
+  color: #0056B3;
 }
 
 

@@ -15,8 +15,8 @@
 
 <div class="row">
   <div class="col-sm-12 jobs-background t" style="background-image:url(static/img/{{ title }});">
-    <div class="layer"></div>
-    <h1>{{ type }}</h1>
+    <!-- <div class="layer"></div> -->
+    <!-- <h1>{{ type }}</h1> -->
   </div>
 </div>
 
@@ -59,9 +59,18 @@
     {% for x in data %}
       {% if loop.index < 4 %}
       <div class="col-sm-12 col-md-4 col-lg-4">
-        <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
-        <p>{{ x.img_text }}</p>
+        <a href='/static/img/{{ x.img_name}}' data-lightbox="{{ type }}" data-title="{{ x.img_text }}" />
+          <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
+        </a>
       </div>
+
+      {% else %}
+
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <a href='/static/img/{{ x.img_name}}' data-lightbox="{{ type }}" data-title="{{ x.img_text }}" />
+        </a>
+      </div>
+
 
       {% endif %}
     {% endfor %}
