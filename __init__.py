@@ -160,17 +160,19 @@ def admin_home_delete():
 
     if request.method == 'POST':
         check_boxes = request.form.getlist('check')
-        with connection.cursor() as cursor:
-            for x in check_boxes:
-                try:
+
+
+        try:
+            with connection.cursor() as cursor:
+                for x in check_boxes:
                     delete_query = "DELETE FROM home_page_img WHERE id = %s"
                     cursor.execute(delete_query,(x),)
-                    connecton.commit()
-                    flash('You have deleted item', 'success')
-                    return redirect(request.url)
-                except Excpetion as e:
-                    flash('You have not deleted item','danger')
-                    return redirect(request.url)
+                    connection.commit()
+            flash('You have deleted item(s)', 'success')
+            return redirect(url_for('admin_home_delete'))
+        except Exception as e:
+            flash('You have not deleted item','danger')
+            return redirect(url_for('admin_home_delete'))
     else:
         with connection.cursor() as cursor:
             select_home_img = 'SELECT * FROM home_page_img'
