@@ -274,7 +274,16 @@ def admin_project_add():
 
 
 
-
+@app.route('/admin-project-gallery-update',methods=['GET','POST'])
+def admin_project_gallery_update():
+    if request.method == 'POST':
+        project = request.form['optradio']
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM {0}".format(project))
+            rows = cursor.fetchall()
+            return render_template('admin-projects-update-gallery-post.html',data=rows)
+    else:
+        return render_template('admin-projects-gallery-update.html')
 
 
 if __name__ == "__main__":
