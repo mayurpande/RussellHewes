@@ -281,9 +281,18 @@ def admin_project_gallery_update():
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM {0}".format(project))
             rows = cursor.fetchall()
-            return render_template('admin-projects-update-gallery-post.html',data=rows)
+            return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
     else:
         return render_template('admin-projects-gallery-update.html')
+
+@app.route('/admin-projects-gallery-update-post',methods=['POST'])
+def admin_project_gallery_update_post():
+    id = request.form['id']
+    project = request.form['project']
+    print(id)
+    print(project)
+    return redirect(url_for('admin_project_gallery_update'))
+
 
 
 if __name__ == "__main__":
