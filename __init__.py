@@ -224,6 +224,56 @@ def admin_home_update():
             rows = cursor.fetchall()
             return render_template('admin-home-update.html',data=rows)
 
+@app.route('/admin-project-add',methods=['GET','POST'])
+def admin_project_add():
+    if request.method == 'POST':
+        caption = request.form['caption']
+        project = request.form['optradio']
+        try:
+
+            if project:
+                if 'file' not in request.files:
+                     flash('No file part','danger')
+                     return redirect(request.url)
+
+                file = request.files['file']
+                # if user does not select file, browser also
+                # submit a empty part without filename
+                if file.filename == '':
+                    flash('No selected file','danger')
+                    return redirect(request.url)
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+                    with connection.cursor() as cursor:
+
+                        if caption:
+
+                             insert_into_img_query = "INSERT INTO {0} (img_name,img_text) VALUES (%s,%s)".format(project)
+                             cursor.execute(insert_into_img_query,(filename,caption),)
+                             connection.commit()
+                             flash('You have added img name/caption to ' + project + ' successfully','success')
+                        else:
+                             insert_into_img_query = "INSERT INTO {0} (img_name) VALUES (%s)".format(project)
+                             cursor.execute(insert_into_img_query,(filename),)
+                             connection.commit()
+                             flash('You have added img name to ' + project + ' successfully','success')
+
+                return redirect(url_for('admin_project_add'))
+            else:
+                flash('You have not selected type','danger')
+                return redirect(url_for('admin_project_add'))
+        except Exception as e:
+            print(str(e))
+            flash('You  have not updated successfully','danger')
+            return redirect(url_for('admin_project_add'))
+    else:
+        return render_template('admin-projects-add.html')
+
+
+
 
 
 
