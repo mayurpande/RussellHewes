@@ -6,7 +6,7 @@ from config_mail import username,pw
 from werkzeug.utils import secure_filename
 import os
 
-UPLOAD_FOLDER = 'static/img/'
+UPLOAD_FOLDER = '/var/www/html/RussellHewes/RussellHewes/static/img/'
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'gif','png'])
 
 app = Flask(__name__)
@@ -186,35 +186,34 @@ def admin_home_update():
 
     if request.method == 'POST':
 
-        saved_data = request.form
-        saved_files = request.files
+        id = request.form['id']
+        caption = request.form['caption']
         try:
-            for x in range(len(saved_data)):
 
-                if 'check|' + str(x) in saved_data:
+            if 'file' not in request.files:
+                 flash('No file part','danger')
+                 return redirect(request.url)
 
-                    if 'file|' + str(x) not in saved_files:
-                         flash('No file part','danger')
-                         return redirect(request.url)
+            file = request.files['file']
+            # if user does not select file, browser also
+            # submit a empty part without filename
+            if file.filename == '':
+                flash('No selected file','danger')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-                    file = saved_files['file|' + str(x)]
-                    # # if user does not select file, browser also
-                    # # submit a empty part without filename
-                    if file.filename == '':
-                        flash('No selected file','danger')
-                        return redirect(request.url)
-                    if file and allowed_file(file.filename):
-                        filename = secure_filename(file.filename)
-                        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-                        with connection.cursor() as cursor:
+                with connection.cursor() as cursor:
 
-                             update_img_name_query = "UPDATE home_page_img set img_name = %s, img_caption = %s WHERE id = %s"
-                             cursor.execute(update_img_name_query,(filename,saved_data['caption|' + str(x)],x),)
-                             connection.commit()
-            flash('You updated successfully','success')
-            return redirect(url_for('admin_home_update'))
+                     update_img_name_query = "UPDATE home_page_img set img_name = %s, img_caption = %s WHERE id = %s"
+                     cursor.execute(update_img_name_query,(filename,caption,id),)
+                     connection.commit()
+                     flash('You have updated successfully','success')
+                     return redirect(url_for('admin_home_update'))
         except Exception as e:
+            print(str(e))
             flash('You  have not updated successfully','danger')
             return redirect(url_for('admin_home_update'))
 

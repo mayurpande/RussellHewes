@@ -24,8 +24,9 @@
       </div>
     </div>
 
-    <form method="post" action={{ url_for('admin_home_update')}} enctype="multipart/form-data">
     {% for x in data %}
+    <form method="post" action="{{ url_for('admin_home_update') }}" enctype="multipart/form-data">
+
       <div class="row update-form">
         <div class="col-sm-12 ml-auto mr-auto">
 
@@ -39,30 +40,35 @@
 
 
             <div class="form-group">
-              <textarea name="caption|{{ x.id }}" id="caption" class="text_area" rows="10" cols="80">{{ x.img_caption }}</textarea>
+              <textarea name="caption" class="text_area" rows="10" cols="80">{{ x.img_caption }}</textarea>
             </div>
 
             <div class="form-group">
-              <input type="file" name="file|{{ x.id }}" class="form-control"/>
+              <input type="file" name="file" class="form-control"/>
             </div>
 
+            <input type="hidden" name="id" value="{{ x.id }}" />
 
 
             <div class="form-group">
-              <input type="checkbox" name="check|{{ x.id }}" id="{{ x.id }}" value="{{ x.id }}" /><span>Update</span>
+              <button type="submit" class="btn btn-success">Update Image/Caption</button>
             </div>
 
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12 ml-auto mr-auto">
-          <hr />
-        </div>
-      </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-default">Update Image/Caption</button>
+
+
+
+
 
     </form>
+
+    <div class="row">
+      <div class="col-sm-12 ml-auto mr-auto">
+        <hr />
+      </div>
+    </div>
+    {% endfor %}
 
 
 
