@@ -289,8 +289,44 @@ def admin_project_gallery_update():
 def admin_project_gallery_update_post():
     id = request.form['id']
     project = request.form['project']
-    print(id)
-    print(project)
+    caption = request.form['caption']
+
+    try:
+
+        if 'file' not in request.files:
+             flash('No file part','danger')
+             return redirect(request.url)
+
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file','danger')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+            with connection.cursor() as cursor:
+                if caption:
+                     update_img_name_query = "UPDATE {0} set img_name = %s, img_caption = %s WHERE id = %s".format(project)
+                     cursor.execute(update_img_name_query,(filename,caption,id),)
+                     connection.commit()
+                     flash('You have updated successfully','success')
+                else:
+                     update_img_name_query = "UPDATE {0} set img_name = %s WHERE id = %s".format(project)
+                     cursor.execute(update_img_name_query,(filename,id),)
+                     connection.commit()
+                     flash('You have updated successfully','success')
+
+                return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print(str(e))
+        flash('You  have not updated successfully','danger')
+        return redirect(url_for('admin_project_gallery_update'))
+
+
     return redirect(url_for('admin_project_gallery_update'))
 
 
