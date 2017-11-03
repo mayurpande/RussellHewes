@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+4{% extends 'layout.html' %}
 
 
 
@@ -16,12 +16,13 @@
     </div>
 </div>
 
+<div class="container">
   <div class="row">
-    <div class="col-sm-9 col-md-9 col-lg-7 ml-auto mr-auto"><hr /></div>
+    <div class="col-sm-12"><hr /></div>
   </div>
 
   <div class="row">
-    <div class="col-sm-9 col-md-9 col-lg-7 ml-auto mr-auto">
+    <div class="col-sm-12">
         <h4>Russell Hewes - Company Profile</h4>
         {% autoescape false %}
         {% for x in data %}
@@ -32,11 +33,11 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-9 col-md-9 col-lg-7 ml-auto mr-auto"><hr /></div>
+    <div class="col-sm-12"><hr /></div>
   </div>
 
   <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-3 ml-auto mr-auto">
+    <div class="col-sm-6 col-md-6 ml-auto mr-auto">
       {% with messages = get_flashed_messages(with_categories=True) %}
            {% if messages %}
              {% for category, message in messages %}
@@ -74,7 +75,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-9 col-md-9 col-lg-7 ml-auto mr-auto"><hr /></div>
+    <div class="col-sm-12"><hr /></div>
   </div>
 
 
