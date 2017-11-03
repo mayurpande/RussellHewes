@@ -14,7 +14,7 @@ body{
    background-color:#000;
    font-family: Verdana, Geneva, sans-serif;
    color:#fff;
-   margin-bottom:400px;
+   margin-bottom:300px;
 }
 
 img{
@@ -29,13 +29,15 @@ h4{
 CUSTOM BOOSTRAP
 ****************************/
 
-#test{
+#call-now-banner{
   margin-top:10px;
   background-color: #141414;
   width:100%;
-
   text-align:center;
-  padding: 10px 0;
+  padding-top:8px;
+  line-height: 0.8rem;
+  font-size:0.9em;
+
 }
 
 hr {
@@ -48,13 +50,7 @@ hr {
 }
 
 
-#demo{
-    width:100%;
-    /*height:calc(100vh - 200px);*/
-    /*position: relative;*/
-    height:calc(100vh - 15px);
 
-}
 
 
 a{
@@ -108,6 +104,10 @@ a:hover{
 }
 
 
+.top-buffer{
+  margin-top:10px;
+}
+
 /*********************************
 header
 **********************************/
@@ -160,6 +160,9 @@ header
   color: #0056B3;
 }
 
+.pc-span{
+  display:none;
+}
 
 
 
@@ -168,6 +171,18 @@ home page
 ********************************/
 
 
+#background-slideshow{
+    width:100%;
+    /*height:calc(100vh - 200px);*/
+    /*position: relative;*/
+    height:calc(100vh - 249.66px);
+
+}
+
+.spacer{
+  width:100%;
+  height:249.66px;
+}
 
 .caption{
   position: absolute;
@@ -192,11 +207,13 @@ FOOTER
       #000 url('../img/map.png') no-repeat center;
   background-size: cover;
   width: 100%;
-  height:400px;
+  height:300px;
   line-height: 60px; /* Vertically center the text there */
   color:#FFEA3D;
   font-size:0.7em;
 }
+
+
 
 .footer h5{
   font-size:1rem;
@@ -204,9 +221,10 @@ FOOTER
 
 .footer p{
   line-height:0.8;
+  font-size:0.9em;
 
 }
 
 .foot-cont{
-  margin-top:40px;
+  margin-top:80px;
 }
