@@ -58,7 +58,7 @@
   <div class="row">
     {% for x in data %}
       {% if loop.index < 4 %}
-      <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="col-sm-12 col-md-4 col-lg-4 top-buffer">
         <a href='/static/img/{{ x.img_name}}' data-lightbox="{{ type }}" data-title="{{ x.img_text }}" />
           <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
         </a>
