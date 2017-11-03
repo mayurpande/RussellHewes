@@ -7,6 +7,15 @@
     font-size:1.25rem;
   }
 
+  #demo{
+      height:calc(100vh - 262px);
+
+  }
+
+  .spacer{
+    height:262px;
+  }
+
 }
 
 @media screen and (min-width:414px){
@@ -40,11 +49,35 @@
     font-size:1.2em;
   }
 
+  #demo{
+      height:calc(100vh - 265px);
+
+  }
+
+  .spacer{
+    height:265px;
+  }
+
 }
 
 @media screen and (min-width:992px){
 
   .jobs-background{
     height: 400px;
+  }
+
+  #demo{
+      height:calc(100vh - 279px);
+
+  }
+
+  .spacer{
+    height:279px;
+  }
+
+  #test{
+    padding-top:10px;
+    line-height: 1rem;
+    font-size:1em;
   }
 }
