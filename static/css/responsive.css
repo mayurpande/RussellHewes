@@ -67,17 +67,30 @@
   }
 
   #background-slideshow{
-      height:calc(100vh - 279px);
+      height:calc(100vh - 247px);
 
   }
 
   .spacer{
-    height:279px;
+    height:247px;
   }
 
   #call-now-banner{
     padding-top:10px;
     line-height: 1rem;
     font-size:1em;
+  }
+
+  .pc-span{
+    display:block;
+  }
+  .pc-view-banner{
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+  }
+
+  .pc-banner-items{
+    margin-right:6px;
   }
 }
