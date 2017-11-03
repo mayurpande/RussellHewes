@@ -52,7 +52,7 @@ hr {
     width:100%;
     /*height:calc(100vh - 200px);*/
     /*position: relative;*/
-    height:calc(100vh - 15px);
+    height:calc(100vh - 292px);
 
 }
 
@@ -217,4 +217,9 @@ FOOTER
 
 .top-buffer{
   margin-top:10px;
+}
+
+.spacer{
+  width:100%;
+  height:292px;
 }
