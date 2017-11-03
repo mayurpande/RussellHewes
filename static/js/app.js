@@ -10,6 +10,7 @@ $(document).ready(function(){
                 x.push('/static/img/' + data[i]['img_name']);
 
             }
+
             var images =$.map(data,function(i) {return i.img_name; });
             $('#demo').backstretch(x,{duration:5000,fade:750});
             $(window).on("backstretch.show", function(e, instance) {
