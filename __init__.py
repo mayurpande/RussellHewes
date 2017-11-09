@@ -274,16 +274,30 @@ def home_images():
 
 
 
-@app.route('/admin-project-gallery-update',methods=['GET','POST'])
+@app.route('/admin-project-gallery',methods=['GET','POST'])
 def admin_project_gallery_update():
     if request.method == 'POST':
         project = request.form['optradio']
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM {0}".format(project))
-            rows = cursor.fetchall()
-            return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
+        action = request.form['action']
+
+        if 'update' in action:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM {0}".format(project))
+                rows = cursor.fetchall()
+                return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
+        else:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM {0}".format(project))
+                rows = cursor.fetchall()
+                return render_template('admin-projects-delete-gallery-post.html',data=rows,project = project)
+
     else:
         return render_template('admin-projects-gallery-update.html')
+
+
+@app.route('/admin-projects-delete-gallery-post',methods=['POST'])
+def admin_project_delete_gallery_post():
+    
 
 @app.route('/admin-projects-gallery-update-post',methods=['POST'])
 def admin_project_gallery_update_post():
@@ -328,6 +342,9 @@ def admin_project_gallery_update_post():
 
 
     return redirect(url_for('admin_project_gallery_update'))
+
+
+
 
 
 
