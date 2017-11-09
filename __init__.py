@@ -89,7 +89,8 @@ def job(type):
       result = cursor.fetchall()
       print(result)
 
-      cursor.execute("SELECT brief FROM {0}_info INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
+      cursor.execute("SELECT brief FROM {0}_info".format(type))
+      #INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
       rows = cursor.fetchall()
 
       cursor.execute("SELECT img_name FROM {0}_back".format(type))
@@ -112,178 +113,215 @@ def home_images():
 
     return jsonify(picture_rows)
 
-# @app.route('/admin')
-# def admin():
-#
-#   return render_template('admin.html')
-#
-#
-# def allowed_file(filename):
-#     return '.' in filename and \
-#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-#
-#
-# @app.route('/admin-home-img',methods=['GET','POST'])
-# def admin_home_img():
-#
-#
-#     if request.method == 'POST':
-#
-#         caption = request.form['caption']
-#
-#
-#         # check if the post request has the file part
-#         if 'file' not in request.files:
-#             flash('No file part','danger')
-#             return redirect(request.url)
-#         file = request.files['file']
-#
-#         # if user does not select file, browser also
-#         # submit a empty part without filename
-#         if file.filename == '':
-#             flash('No selected file','danger')
-#             return redirect(request.url)
-#         if file and allowed_file(file.filename):
-#             filename = secure_filename(file.filename)
-#             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#             with connection.cursor() as cursor:
-#
-#                  upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
-#                  cursor.execute(upload_img_name_query,(filename,caption),)
-#                  connection.commit()
-#                  flash('New image/text uploaded','success')
-#                  return redirect(request.url)
-#     return render_template('admin-home.html')
-#
-# @app.route('/admin-home-delete',methods=['GET','POST'])
-# def admin_home_delete():
-#
-#     if request.method == 'POST':
-#         check_boxes = request.form.getlist('check')
-#
-#
-#         try:
-#             with connection.cursor() as cursor:
-#                 for x in check_boxes:
-#                     delete_query = "DELETE FROM home_page_img WHERE id = %s"
-#                     cursor.execute(delete_query,(x),)
-#                     connection.commit()
-#             flash('You have deleted item(s)', 'success')
-#             return redirect(url_for('admin_home_delete'))
-#         except Exception as e:
-#             flash('You have not deleted item','danger')
-#             return redirect(url_for('admin_home_delete'))
-#     else:
-#         with connection.cursor() as cursor:
-#             select_home_img = 'SELECT * FROM home_page_img'
-#             cursor.execute(select_home_img,(),)
-#             rows = cursor.fetchall()
-#             return render_template('admin-home-delete.html',data=rows)
-#
-#
-# @app.route('/admin-home-update',methods=['GET','POST'])
-# def admin_home_update():
-#
-#     if request.method == 'POST':
-#
-#         id = request.form['id']
-#         caption = request.form['caption']
-#         try:
-#
-#             if 'file' not in request.files:
-#                  flash('No file part','danger')
-#                  return redirect(request.url)
-#
-#             file = request.files['file']
-#             # if user does not select file, browser also
-#             # submit a empty part without filename
-#             if file.filename == '':
-#                 flash('No selected file','danger')
-#                 return redirect(request.url)
-#             if file and allowed_file(file.filename):
-#                 filename = secure_filename(file.filename)
-#                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#
-#
-#                 with connection.cursor() as cursor:
-#
-#                      update_img_name_query = "UPDATE home_page_img set img_name = %s, img_caption = %s WHERE id = %s"
-#                      cursor.execute(update_img_name_query,(filename,caption,id),)
-#                      connection.commit()
-#                      flash('You have updated successfully','success')
-#                      return redirect(url_for('admin_home_update'))
-#         except Exception as e:
-#             print(str(e))
-#             flash('You  have not updated successfully','danger')
-#             return redirect(url_for('admin_home_update'))
-#
-#     else:
-#         with connection.cursor() as cursor:
-#             select_home_img = 'SELECT * FROM home_page_img'
-#             cursor.execute(select_home_img,(),)
-#             rows = cursor.fetchall()
-#             return render_template('admin-home-update.html',data=rows)
-#
-# @app.route('/admin-project-add',methods=['GET','POST'])
-# def admin_project_add():
-#     if request.method == 'POST':
-#         caption = request.form['caption']
-#         project = request.form['optradio']
-#         try:
-#
-#             if project:
-#                 if 'file' not in request.files:
-#                      flash('No file part','danger')
-#                      return redirect(request.url)
-#
-#                 file = request.files['file']
-#                 # if user does not select file, browser also
-#                 # submit a empty part without filename
-#                 if file.filename == '':
-#                     flash('No selected file','danger')
-#                     return redirect(request.url)
-#                 if file and allowed_file(file.filename):
-#                     filename = secure_filename(file.filename)
-#                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#
-#
-#                     with connection.cursor() as cursor:
-#
-#                         if caption:
-#
-#                              insert_into_img_query = "INSERT INTO {0} (img_name,img_text) VALUES (%s,%s)".format(project)
-#                              cursor.execute(insert_into_img_query,(filename,caption),)
-#                              connection.commit()
-#                              flash('You have added img name/caption to ' + project + ' successfully','success')
-#                         else:
-#                              insert_into_img_query = "INSERT INTO {0} (img_name) VALUES (%s)".format(project)
-#                              cursor.execute(insert_into_img_query,(filename),)
-#                              connection.commit()
-#                              flash('You have added img name to ' + project + ' successfully','success')
-#
-#                 return redirect(url_for('admin_project_add'))
-#             else:
-#                 flash('You have not selected type','danger')
-#                 return redirect(url_for('admin_project_add'))
-#         except Exception as e:
-#             print(str(e))
-#             flash('You  have not updated successfully','danger')
-#             return redirect(url_for('admin_project_add'))
-#     else:
-#         return render_template('admin-projects-add.html')
+@app.route('/admin')
+def admin():
+
+  return render_template('admin.html')
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/admin-home-img',methods=['GET','POST'])
+def admin_home_img():
+
+
+    if request.method == 'POST':
+
+        caption = request.form['caption']
+
+
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part','danger')
+            return redirect(request.url)
+        file = request.files['file']
+
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file','danger')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            with connection.cursor() as cursor:
+
+                 upload_img_name_query = "INSERT INTO home_page_img (img_name,img_caption) VALUES (%s,%s)"
+                 cursor.execute(upload_img_name_query,(filename,caption),)
+                 connection.commit()
+                 flash('New image/text uploaded','success')
+                 return redirect(request.url)
+    return render_template('admin-home.html')
+
+@app.route('/admin-home-delete',methods=['GET','POST'])
+def admin_home_delete():
+
+    if request.method == 'POST':
+        check_boxes = request.form.getlist('check')
+
+
+        try:
+            with connection.cursor() as cursor:
+                for x in check_boxes:
+                    delete_query = "DELETE FROM home_page_img WHERE id = %s"
+                    cursor.execute(delete_query,(x),)
+                    connection.commit()
+            flash('You have deleted item(s)', 'success')
+            return redirect(url_for('admin_home_delete'))
+        except Exception as e:
+            flash('You have not deleted item','danger')
+            return redirect(url_for('admin_home_delete'))
+    else:
+        with connection.cursor() as cursor:
+            select_home_img = 'SELECT * FROM home_page_img'
+            cursor.execute(select_home_img,(),)
+            rows = cursor.fetchall()
+            return render_template('admin-home-delete.html',data=rows)
+
+
+@app.route('/admin-home-update',methods=['GET','POST'])
+def admin_home_update():
+
+    if request.method == 'POST':
+
+        id = request.form['id']
+        caption = request.form['caption']
+        try:
+
+            if 'file' not in request.files:
+                 flash('No file part','danger')
+                 return redirect(request.url)
+
+            file = request.files['file']
+            # if user does not select file, browser also
+            # submit a empty part without filename
+            if file.filename == '':
+                flash('No selected file','danger')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+                with connection.cursor() as cursor:
+
+                     update_img_name_query = "UPDATE home_page_img set img_name = %s, img_caption = %s WHERE id = %s"
+                     cursor.execute(update_img_name_query,(filename,caption,id),)
+                     connection.commit()
+                     flash('You have updated successfully','success')
+                     return redirect(url_for('admin_home_update'))
+        except Exception as e:
+            print(str(e))
+            flash('You  have not updated successfully','danger')
+            return redirect(url_for('admin_home_update'))
+
+    else:
+        with connection.cursor() as cursor:
+            select_home_img = 'SELECT * FROM home_page_img'
+            cursor.execute(select_home_img,(),)
+            rows = cursor.fetchall()
+            return render_template('admin-home-update.html',data=rows)
+
+@app.route('/admin-project-add',methods=['GET','POST'])
+def admin_project_add():
+    if request.method == 'POST':
+        caption = request.form['caption']
+        project = request.form['optradio']
+        try:
+
+            if project:
+                if 'file' not in request.files:
+                     flash('No file part','danger')
+                     return redirect(request.url)
+
+                file = request.files['file']
+                # if user does not select file, browser also
+                # submit a empty part without filename
+                if file.filename == '':
+                    flash('No selected file','danger')
+                    return redirect(request.url)
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+                    with connection.cursor() as cursor:
+
+                        if caption:
+
+                             insert_into_img_query = "INSERT INTO {0} (img_name,img_text) VALUES (%s,%s)".format(project)
+                             cursor.execute(insert_into_img_query,(filename,caption),)
+                             connection.commit()
+                             flash('You have added img name/caption to ' + project + ' successfully','success')
+                        else:
+                             insert_into_img_query = "INSERT INTO {0} (img_name) VALUES (%s)".format(project)
+                             cursor.execute(insert_into_img_query,(filename),)
+                             connection.commit()
+                             flash('You have added img name to ' + project + ' successfully','success')
+
+                return redirect(url_for('admin_project_add'))
+            else:
+                flash('You have not selected type','danger')
+                return redirect(url_for('admin_project_add'))
+        except Exception as e:
+            print(str(e))
+            flash('You  have not updated successfully','danger')
+            return redirect(url_for('admin_project_add'))
+    else:
+        return render_template('admin-projects-add.html')
 
 
 
-@app.route('/admin-project-gallery-update',methods=['GET','POST'])
+@app.route('/admin-project-gallery',methods=['GET','POST'])
 def admin_project_gallery_update():
     if request.method == 'POST':
         project = request.form['optradio']
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM {0}".format(project))
-            rows = cursor.fetchall()
-            return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
+        action = request.form['action']
+        print()
+        print(action)
+        print()
+        if 'update' in action:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM {0}".format(project))
+                rows = cursor.fetchall()
+                return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
+        else:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM {0}".format(project))
+                rows = cursor.fetchall()
+                return render_template('admin-projects-delete-gallery-post.html',data=rows,project = project)
+
     else:
         return render_template('admin-projects-gallery-update.html')
+
+
+@app.route('/admin-projects-delete-gallery-post',methods=['POST'])
+def admin_project_delete_gallery_post():
+
+    check_boxes = request.form.getlist('check')
+    project = request.form['project']
+
+
+    try:
+        with connection.cursor() as cursor:
+            for x in check_boxes:
+                delete_query = "DELETE FROM {0} WHERE id = %s".format(project)
+                cursor.execute(delete_query,(x),)
+                connection.commit()
+        flash('You have deleted item(s)', 'success')
+        return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print()
+        print(str(e))
+        print()
+        flash('You have not deleted item','danger')
+        return redirect(url_for('admin_project_gallery_update'))
+
+
+
 
 @app.route('/admin-projects-gallery-update-post',methods=['POST'])
 def admin_project_gallery_update_post():
@@ -328,6 +366,9 @@ def admin_project_gallery_update_post():
 
 
     return redirect(url_for('admin_project_gallery_update'))
+
+
+
 
 
 
