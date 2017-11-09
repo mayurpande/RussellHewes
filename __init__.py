@@ -325,6 +325,11 @@ def admin_project_gallery_update():
         return render_template('admin-projects-gallery-update.html')
 
 
+@app.route('/admin-projects-update-content-post',methods=['POST'])
+def admin_project_update_content_post():
+    return 'test'
+
+
 @app.route('/admin-projects-delete-gallery-post',methods=['POST'])
 def admin_project_delete_gallery_post():
 
