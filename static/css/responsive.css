@@ -1,4 +1,4 @@
-@media screen and (min-width:375px){
+@media only screen and (min-width:375px){
 
   .footer{
     font-size: 0.8em;
@@ -18,7 +18,7 @@
 
 }
 
-@media screen and (min-width:414px){
+@media only screen and (min-width:414px){
 
   .footer{
     font-size: 0.9em;
@@ -31,7 +31,7 @@
 
 
 
-@media screen and (min-width:768px){
+@media only screen and (min-width:768px){
 
   .caption * {
     width:50%;
@@ -60,7 +60,7 @@
 
 }
 
-@media screen and (min-width:992px){
+@media only screen and (min-width:992px){
 
   .jobs-background{
     height: 400px;
