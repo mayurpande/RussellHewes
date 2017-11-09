@@ -47,6 +47,8 @@
                 <input type="checkbox" name="check" id="{{ x.id }}" value="{{ x.id }}" /><span>Delete</span>
               </div>
 
+
+
           </div>
         </div>
         <div class="row">
@@ -55,6 +57,7 @@
           </div>
         </div>
       {% endfor %}
+      <input type="hidden" name="project" id="project" value="{{ project }}" />
       <button type="submit" class="btn btn-default">Delete Image/Caption</button>
 
     </form>
