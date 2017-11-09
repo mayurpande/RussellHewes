@@ -301,19 +301,25 @@ def admin_project_gallery_update():
     if request.method == 'POST':
         project = request.form['optradio']
         action = request.form['action']
-        print()
-        print(action)
-        print()
         if 'update' in action:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM {0}".format(project))
                 rows = cursor.fetchall()
                 return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
-        else:
+        elif 'delete' in action:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM {0}".format(project))
                 rows = cursor.fetchall()
                 return render_template('admin-projects-delete-gallery-post.html',data=rows,project = project)
+        else:
+            with connection.cursor() as cursor:
+                #select from <project_name>_info table
+                cursor.execute("SELECT * FROM {0}_info".format(project))
+                rows = cursor.fetchall()
+                #select from <project_name>_back table
+                cursor.execute("SELECT * FROM {0}_back".format(project))
+                results = cursor.fetchall()
+                return render_template('admin-projects-update-content-post.html',data=rows,project = project, result=results)
 
     else:
         return render_template('admin-projects-gallery-update.html')
