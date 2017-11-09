@@ -297,7 +297,7 @@ def admin_project_add():
 
 
 @app.route('/admin-project-gallery',methods=['GET','POST'])
-def admin_project_gallery_update():
+def admin_project_gallery():
     if request.method == 'POST':
         project = request.form['optradio']
         action = request.form['action']
@@ -336,13 +336,13 @@ def admin_project_update_content_post():
             cursor.execute(update_project_info,(caption,id),)
             connection.commit()
             flash('You have updated ' + project + ' text','success')
-            return redirect(url_for('admin_project_gallery_update'))
+            return redirect(url_for('admin_project_gallery'))
     except Exception as e:
         print()
         print(str(e))
         print()
         flash('You have not updated ' + project + ' text','danger')
-        return redirect(url_for('admin_project_gallery_update'))
+        return redirect(url_for('admin_project_gallery'))
 
 
 @app.route('/admin-projects-update-content-img', methods=['POST'])
@@ -373,11 +373,11 @@ def admin_project_update_content_img():
                  cursor.execute(update_img_name_query,(filename,id),)
                  connection.commit()
                  flash('You have updated successfully','success')
-                 return redirect(url_for('admin_project_gallery_update'))
+                 return redirect(url_for('admin_project_gallery'))
     except Exception as e:
         print(str(e))
         flash('You  have not updated successfully','danger')
-        return redirect(url_for('admin_project_gallery_update'))
+        return redirect(url_for('admin_project_gallery'))
 
 
 
@@ -396,13 +396,13 @@ def admin_project_delete_gallery_post():
                 cursor.execute(delete_query,(x),)
                 connection.commit()
         flash('You have deleted item(s)', 'success')
-        return redirect(url_for('admin_project_gallery_update'))
+        return redirect(url_for('admin_project_gallery'))
     except Exception as e:
         print()
         print(str(e))
         print()
         flash('You have not deleted item','danger')
-        return redirect(url_for('admin_project_gallery_update'))
+        return redirect(url_for('admin_project_gallery'))
 
 
 
@@ -442,14 +442,14 @@ def admin_project_gallery_update_post():
                      connection.commit()
                      flash('You have updated ' + project + ' gallery successfully' ,'success')
 
-                return redirect(url_for('admin_project_gallery_update'))
+                return redirect(url_for('admin_project_gallery'))
     except Exception as e:
         print(str(e))
         flash('You  have not updated ' + project + ' gallery successfully','danger')
-        return redirect(url_for('admin_project_gallery_update'))
+        return redirect(url_for('admin_project_gallery'))
 
 
-    return redirect(url_for('admin_project_gallery_update'))
+    return redirect(url_for('admin_project_gallery'))
 
 
 
