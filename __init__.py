@@ -327,7 +327,22 @@ def admin_project_gallery_update():
 
 @app.route('/admin-projects-update-content-post',methods=['POST'])
 def admin_project_update_content_post():
-    return 'test'
+    caption = request.form['caption']
+    project = request.form['project']
+    id = request.form['id']
+    try:
+        with connection.cursor() as cursor:
+            update_project_info = "UPDATE {0}_info SET brief = %s WHERE id = %s".format(project)
+            cursor.execute(update_project_info,(caption,id),)
+            connection.commit()
+            flash('You have updated ' + project + ' text','success')
+            return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print()
+        print(str(e))
+        print()
+        flash('You have not updated ' + project + ' text','danger')
+        return redirect(url_for('admin_project_gallery_update'))
 
 
 @app.route('/admin-projects-delete-gallery-post',methods=['POST'])
