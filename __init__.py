@@ -310,7 +310,7 @@ def admin_project_gallery_update_post():
 
             with connection.cursor() as cursor:
                 if caption:
-                     update_img_name_query = "UPDATE {0} set img_name = %s, img_caption = %s WHERE id = %s".format(project)
+                     update_img_name_query = "UPDATE {0} set img_name = %s, img_text = %s WHERE id = %s".format(project)
                      cursor.execute(update_img_name_query,(filename,caption,id),)
                      connection.commit()
                      flash('You have updated successfully','success')
@@ -318,12 +318,12 @@ def admin_project_gallery_update_post():
                      update_img_name_query = "UPDATE {0} set img_name = %s WHERE id = %s".format(project)
                      cursor.execute(update_img_name_query,(filename,id),)
                      connection.commit()
-                     flash('You have updated successfully','success')
+                     flash('You have updated ' + project + ' gallery successfully' ,'success')
 
                 return redirect(url_for('admin_project_gallery_update'))
     except Exception as e:
         print(str(e))
-        flash('You  have not updated successfully','danger')
+        flash('You  have not updated ' + project + ' gallery successfully','danger')
         return redirect(url_for('admin_project_gallery_update'))
 
 
