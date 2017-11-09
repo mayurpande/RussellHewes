@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+{% if (type == 'electricians') %}
+  {% set active_page = 'electricians' %}
+{% elif (type == 'developments') %}
+    {% set active_page = 'developments' %}
+{% elif (type == 'facilities') %}
+    {% set active_page = 'facilities' %}
+{% endif %}
+
+
+{% block content %}
+
+
+
+<div class="row">
+  <div class="col-sm-12 jobs-background t" style="background-image:url(static/img/{{ title }});">
+    <!-- <div class="layer"></div> -->
+    <!-- <h1>{{ type }}</h1> -->
+  </div>
+</div>
+
+
+<div class="container">
+
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}">
+                   <li style="list-style:none;">{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      {% autoescape false %}
+      {% for x in brief %}
+        {{ x.brief }}
+      {% endfor %}
+      {% endautoescape %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+    {% for x in data %}
+      {% if loop.index < 4 %}
+      <div class="col-sm-12 col-md-4 col-lg-4 top-buffer">
+        <a href='/static/img/{{ x.img_name}}' data-lightbox="{{ type }}" data-title="{{ x.img_text }}" />
+          <img src="/static/img/{{ x.img_name }}" alt="{{ img_name }}" class="img-responsive" />
+        </a>
+      </div>
+
+      {% else %}
+
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <a href='/static/img/{{ x.img_name}}' data-lightbox="{{ type }}" data-title="{{ x.img_text }}" />
+        </a>
+      </div>
+
+
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+
+
+    <div class="col-sm-6 col-md-6 ml-auto mr-auto">
+
+      <h4>Get in touch for a quote now</h4>
+      <p>Please tell us more about your enqiury</p>
+      <form method="post" action={{ url_for('job',type='{{ type }}') }}>
+        <div class="form-group">
+          <label for="username">Name:</label>
+          <input type="text" class="form-control" id="username"  placeholder="Enter name (mandatory)" name="username">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email (mandatory)" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="number">Number:</label>
+          <input type="text" class="form-control" id="number"  placeholder="Enter number" name="number">
+        </div>
+
+        <input type="hidden" name="email-type" id="email-type" value="{{ type }}" />
+
+        <div class="form-group">
+          <label for="text-content">Message:</label>
+          <textarea name="text-content" class="form-control" id="text-content" rows=4></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 t">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a href="{{ url_for('admin_home_img') }}">
+            <p>Add Home Page (slideshow image)</p>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="{{ url_for('admin_home_delete') }}">
+            <p>Delete Home Page (slideshow image)</p>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="{{ url_for('admin_home_update') }}">
+            <p>Update Home Page (slideshow image, and main text (top selector))</p>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="{{ url_for('admin_project_add') }}">
+            <p>Add to project page</p>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="{{ url_for('admin_project_gallery') }}">
+            <p>Update/Delete Project Pages</p>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

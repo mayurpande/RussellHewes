@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12 t">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}">
+                   <li style="list-style:none;">{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 ml-auto mr-auto">
+
+      <h4>Add to Project Pages</h4>
+      <form method="post" action={{ url_for('admin_project_add')}} enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label class="radio-inline"><input type="radio" name="optradio" value="electricians">Electricians</label>
+          <label class="radio-inline"><input type="radio" name="optradio" value="developments">Developments</label>
+          <label class="radio-inline"><input type="radio" name="optradio" value="facilities">Facilities</label>
+        </div>
+
+        <div class="form-group">
+          <input type="file" name="file" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="caption" id="caption" class="form-control" placeholder="img caption"/>
+        </div>
+        <button type="submit" name="add" class="btn btn-success">Add project page</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-3 col-lg-1 ml-auto mr-auto">
+        <a href="{{ url_for('admin') }}" class="btn btn-default" role="button">Back to admin</a>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

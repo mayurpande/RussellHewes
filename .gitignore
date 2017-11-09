@@ -1,0 +1,5 @@
+env/
+db.py
+__pycache__/
+config_mail.py
+static/img/*

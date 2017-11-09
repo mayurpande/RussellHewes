@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content %}
+<!-- <div class="row">
+  <div class="col-sm-12"><hr /></div>
+</div> -->
+
+
+
+
+<div class="spacer">
+  &nbsp;
+</div>
+
+<!-- background image -->
+
+<div class="row">
+    <div id="background-slideshow">
+      <div class="caption"></div>
+    </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+        <h4>Russell Hewes - Company Profile</h4>
+        {% autoescape false %}
+        {% for x in data %}
+          {{ x.content }}
+        {% endfor %}
+        {% endautoescape %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6 ml-auto mr-auto">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+           {% if messages %}
+             {% for category, message in messages %}
+                 <ul class="flashes alert alert-{{ category }}" >
+                   <li style="list-style:none;">{{ message }}</li>
+                </ul>
+            {% endfor %}
+           {% endif %}
+      {% endwith %}
+      <h4>Get in touch for a quote now</h4>
+      <p>Please tell us more about your enqiury</p>
+      <form method="post" action="/">
+        <div class="form-group">
+          <label for="username">Name:</label>
+          <input type="text" class="form-control" id="username"  placeholder="Enter name" name="username">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="number">Number:</label>
+          <input type="text" class="form-control" id="number"  placeholder="Enter number" name="number">
+        </div>
+
+        <div class="form-group">
+          <label for="text-content">Message:</label>
+          <textarea name="text-content" class="form-control" id="text-content" rows=4></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12"><hr /></div>
+  </div>
+
+
+</div>
+
+{% endblock %}
