@@ -274,6 +274,60 @@ def home_images():
 
 
 
+@app.route('/admin-project-gallery-update',methods=['GET','POST'])
+def admin_project_gallery_update():
+    if request.method == 'POST':
+        project = request.form['optradio']
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM {0}".format(project))
+            rows = cursor.fetchall()
+            return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
+    else:
+        return render_template('admin-projects-gallery-update.html')
+
+@app.route('/admin-projects-gallery-update-post',methods=['POST'])
+def admin_project_gallery_update_post():
+    id = request.form['id']
+    project = request.form['project']
+    caption = request.form['caption']
+
+    try:
+
+        if 'file' not in request.files:
+             flash('No file part','danger')
+             return redirect(request.url)
+
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file','danger')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+            with connection.cursor() as cursor:
+                if caption:
+                     update_img_name_query = "UPDATE {0} set img_name = %s, img_text = %s WHERE id = %s".format(project)
+                     cursor.execute(update_img_name_query,(filename,caption,id),)
+                     connection.commit()
+                     flash('You have updated successfully','success')
+                else:
+                     update_img_name_query = "UPDATE {0} set img_name = %s WHERE id = %s".format(project)
+                     cursor.execute(update_img_name_query,(filename,id),)
+                     connection.commit()
+                     flash('You have updated ' + project + ' gallery successfully' ,'success')
+
+                return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print(str(e))
+        flash('You  have not updated ' + project + ' gallery successfully','danger')
+        return redirect(url_for('admin_project_gallery_update'))
+
+
+    return redirect(url_for('admin_project_gallery_update'))
 
 
 
