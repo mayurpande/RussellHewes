@@ -223,7 +223,12 @@ def admin_home_update():
             select_home_img = 'SELECT * FROM home_page_img'
             cursor.execute(select_home_img,(),)
             rows = cursor.fetchall()
-            return render_template('admin-home-update.html',data=rows)
+            #select home_page table data
+            select_home_query = "SELECT * FROM home_page"
+            cursor.execute(select_home_query,(),)
+            results = cursor.fetchall()
+
+            return render_template('admin-home-update.html',data=rows,result=result)
 
 @app.route('/admin-project-add',methods=['GET','POST'])
 def admin_project_add():
