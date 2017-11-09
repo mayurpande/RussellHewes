@@ -345,6 +345,43 @@ def admin_project_update_content_post():
         return redirect(url_for('admin_project_gallery_update'))
 
 
+@app.route('/admin-projects-update-content-img', methods=['POST'])
+def admin_project_update_content_img():
+
+    id = request.form['id']
+    project = request.form['project']
+    try:
+
+        if 'file' not in request.files:
+             flash('No file part','danger')
+             return redirect(request.url)
+
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file','danger')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+            with connection.cursor() as cursor:
+
+                 update_img_name_query = "UPDATE {0}_back set img_name = %s WHERE id = %s".format(project)
+                 cursor.execute(update_img_name_query,(filename,id),)
+                 connection.commit()
+                 flash('You have updated successfully','success')
+                 return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print(str(e))
+        flash('You  have not updated successfully','danger')
+        return redirect(url_for('admin_project_gallery_update'))
+
+
+
+
 @app.route('/admin-projects-delete-gallery-post',methods=['POST'])
 def admin_project_delete_gallery_post():
 
