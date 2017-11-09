@@ -108,6 +108,14 @@ a:hover{
   margin-top:10px;
 }
 
+
+
+
+
+
+.list-group-item {
+  background-color:gray !important;
+}
 /*********************************
 header
 **********************************/
