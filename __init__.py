@@ -301,22 +301,85 @@ def admin_project_gallery_update():
     if request.method == 'POST':
         project = request.form['optradio']
         action = request.form['action']
-        print()
-        print(action)
-        print()
         if 'update' in action:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM {0}".format(project))
                 rows = cursor.fetchall()
                 return render_template('admin-projects-update-gallery-post.html',data=rows,project = project)
-        else:
+        elif 'delete' in action:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM {0}".format(project))
                 rows = cursor.fetchall()
                 return render_template('admin-projects-delete-gallery-post.html',data=rows,project = project)
+        else:
+            with connection.cursor() as cursor:
+                #select from <project_name>_info table
+                cursor.execute("SELECT * FROM {0}_info".format(project))
+                rows = cursor.fetchall()
+                #select from <project_name>_back table
+                cursor.execute("SELECT * FROM {0}_back".format(project))
+                results = cursor.fetchall()
+                return render_template('admin-projects-update-content-post.html',data=rows,project = project, result=results)
 
     else:
         return render_template('admin-projects-gallery-update.html')
+
+
+@app.route('/admin-projects-update-content-post',methods=['POST'])
+def admin_project_update_content_post():
+    caption = request.form['caption']
+    project = request.form['project']
+    id = request.form['id']
+    try:
+        with connection.cursor() as cursor:
+            update_project_info = "UPDATE {0}_info SET brief = %s WHERE id = %s".format(project)
+            cursor.execute(update_project_info,(caption,id),)
+            connection.commit()
+            flash('You have updated ' + project + ' text','success')
+            return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print()
+        print(str(e))
+        print()
+        flash('You have not updated ' + project + ' text','danger')
+        return redirect(url_for('admin_project_gallery_update'))
+
+
+@app.route('/admin-projects-update-content-img', methods=['POST'])
+def admin_project_update_content_img():
+
+    id = request.form['id']
+    project = request.form['project']
+    try:
+
+        if 'file' not in request.files:
+             flash('No file part','danger')
+             return redirect(request.url)
+
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file','danger')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+            with connection.cursor() as cursor:
+
+                 update_img_name_query = "UPDATE {0}_back set img_name = %s WHERE id = %s".format(project)
+                 cursor.execute(update_img_name_query,(filename,id),)
+                 connection.commit()
+                 flash('You have updated successfully','success')
+                 return redirect(url_for('admin_project_gallery_update'))
+    except Exception as e:
+        print(str(e))
+        flash('You  have not updated successfully','danger')
+        return redirect(url_for('admin_project_gallery_update'))
+
+
 
 
 @app.route('/admin-projects-delete-gallery-post',methods=['POST'])
