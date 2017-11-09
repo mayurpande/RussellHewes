@@ -89,7 +89,8 @@ def job(type):
       result = cursor.fetchall()
       print(result)
 
-      cursor.execute("SELECT brief FROM {0}_info INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
+      cursor.execute("SELECT brief FROM {0}_info".format(type))
+      #INNER JOIN {1} ON {2}.id = {3}_info.ref_id".format(type,type,type,type))
       rows = cursor.fetchall()
 
       cursor.execute("SELECT img_name FROM {0}_back".format(type))
