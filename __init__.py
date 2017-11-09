@@ -223,7 +223,28 @@ def admin_home_update():
             select_home_img = 'SELECT * FROM home_page_img'
             cursor.execute(select_home_img,(),)
             rows = cursor.fetchall()
-            return render_template('admin-home-update.html',data=rows)
+            #select home_page table data
+            select_home_query = "SELECT * FROM home_page"
+            cursor.execute(select_home_query,(),)
+            results = cursor.fetchall()
+
+            return render_template('admin-home-update.html',data=rows,result=results)
+
+@app.route('/admin-home-text-update',methods=['POST'])
+def admin_home_text_update():
+    caption = request.form['caption']
+    try:
+        with connection.cursor() as cursor:
+            update_home_page_text_query = "UPDATE home_page SET content = %s WHERE id = %s"
+            cursor.execute(update_home_page_text_query,(caption,1))
+            flash('Home page text updated','success')
+            return redirect(url_for('admin_home_update'))
+    except Exception as e:
+        print()
+        print(str(e))
+        print()
+        flash('Home page text not updated','danger')
+        return redirect(url_for('admin_home_update'))
 
 @app.route('/admin-project-add',methods=['GET','POST'])
 def admin_project_add():
